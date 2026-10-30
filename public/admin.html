@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Radar & Dashboard - Kho Báu Triết Học</title>
+  <link rel="stylesheet" href="admin.css?v=42">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=JetBrains+Mono:wght@400;600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+
+  <!-- Admin Top Navbar -->
+  <header class="admin-navbar">
+    <div class="nav-brand">
+      <span class="crown-icon">👑</span>
+      <div>
+        <div class="brand-title">KHO BÁU TRIẾT HỌC</div>
+        <div class="brand-badge">ADMIN CONTROL CENTER</div>
+      </div>
+    </div>
+
+    <!-- Quick Stats Cards (Compact) -->
+    <div class="quick-stats-strip">
+      <div class="stat-box">
+        <span class="stat-title">ONLINE</span>
+        <span class="stat-val highlight-green"><span id="stat-online-count">0</span>/<span id="stat-total-players" style="font-size:13px; color:#94a3b8;">0</span></span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-title">RƯƠNG</span>
+        <span class="stat-val highlight-gold" id="stat-treasures-count">30</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-title">CÂU HỎI</span>
+        <span class="stat-val highlight-cyan" id="stat-questions-count">30</span>
+      </div>
+      <!-- Online / 4G Remote Status & Switch -->
+      <div class="stat-box tunnel-stat-box" id="btn-toggle-tunnel" style="cursor:pointer;" title="Bấm để BẬT / TẮT chế độ chơi qua 4G và Internet từ xa">
+        <span class="stat-title" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>🌐 CHẾ ĐỘ 4G / ONLINE</span>
+          <span class="tunnel-pulse-dot online" id="tunnel-dot"></span>
+        </span>
+        <span class="stat-val highlight-green" id="tunnel-status-text" style="font-size:12px; font-weight:800;">Đang kết nối...</span>
+      </div>
+
+      <div class="stat-box qr-stat-trigger" id="btn-show-admin-qr" style="border-color:#38bdf8; cursor:pointer;" title="Nhấp để hiển thị mã QR phóng to cho điện thoại">
+        <span class="stat-title" style="color:#38bdf8;">📱 ĐIỆN THOẠI QUÉT QR 🔍</span>
+        <span class="stat-val highlight-cyan" id="admin-mobile-url" style="font-size:12px; font-weight:700;">Đang tải...</span>
+      </div>
+    </div>
+
+    <!-- Admin Action & Match Controls -->
+    <div class="nav-actions">
+      <!-- Match Timer Widget Group -->
+      <div class="match-control-group">
+        <div class="stat-box timer-display-box" id="admin-timer-box">
+          <span class="stat-title" style="color:#f59e0b;">⏱️ THỜI GIAN</span>
+          <span class="stat-val highlight-gold" id="admin-match-timer">10:00</span>
+        </div>
+        <div class="stat-box timer-setting-box">
+          <span class="stat-title" style="color:#38bdf8;">⏰ PHÚT</span>
+          <input type="number" id="admin-timer-input" min="1" max="60" value="10" step="1">
+        </div>
+        <button id="btn-admin-start-timer" class="btn-action btn-timer-start" title="Bắt đầu đếm thời gian cho tất cả người chơi">
+          <span id="btn-admin-timer-text">▶ Bắt Đầu</span>
+        </button>
+      </div>
+
+      <button id="btn-admin-broadcast" class="btn-action btn-blue" title="Gửi thông báo tới tất cả người chơi">📢 Phát Thông Báo</button>
+      <button id="btn-admin-view-rankings" class="btn-action btn-gold" title="Xem bảng tổng hợp kết quả & bục vinh danh">🏆 Xem Tổng Hợp</button>
+    </div>
+  </header>
+
+  <!-- Main Admin Layout: Split Map & Dashboard -->
+  <main class="admin-main">
+    
+    <!-- Left Column: ADMIN RADAR MAP -->
+    <section class="admin-map-section">
+      <div class="section-header">
+        <div class="header-left">
+          <span class="radar-pulse"></span>
+          <h2>BẢN ĐỒ GIÁM SÁT REALTIME (ADMIN MAP)</h2>
+        </div>
+        <div class="map-legend">
+          <span class="legend-item"><span class="dot-online"></span> Đang di chuyển / Online</span>
+          <span class="legend-item"><span class="dot-treasure"></span> Rương Kho Báu</span>
+        </div>
+      </div>
+
+      <!-- Radar Canvas Container -->
+      <div class="radar-viewport">
+        <canvas id="adminRadarCanvas" width="960" height="720"></canvas>
+
+        <!-- Hover / Click Tooltip -->
+        <div id="radar-tooltip" class="radar-tooltip hidden">
+          <div class="tt-name" id="tt-name">Player01</div>
+          <div class="tt-info" id="tt-info">Điểm: 120 | Khu vực: Rừng Sâu Đạo Đức</div>
+        </div>
+      </div>
+      
+      <div class="map-controls-bar">
+        <span>Kích thước bản đồ: 3600 × 2700 px</span>
+        <span class="map-instruction">💡 Bảng bên phải hiển thị TOP 3 người chơi có điểm số cao nhất thời gian thực</span>
+      </div>
+    </section>
+
+    <!-- Right Column: DASHBOARD & INSPECTOR & REALTIME LOG -->
+    <section class="admin-dashboard-section">
+      
+      <!-- Upper: Realtime Rankings Panel -->
+      <div class="panel-box top3-panel" id="top3-panel">
+        <div class="panel-header">
+          <h3 id="rankings-panel-title">🏆 BẢNG XẾP HẠNG</h3>
+          <span class="badge-status-pill status-online" id="top3-status-badge">REALTIME</span>
+        </div>
+
+        <div class="top3-container" id="top3-container">
+          <!-- Danh sách thẻ xếp hạng tất cả các TOP sẽ được render động tại đây -->
+        </div>
+      </div>
+
+      <!-- Middle: All Players Table -->
+      <div class="panel-box table-panel">
+        <div class="panel-header">
+          <h3>👥 DANH SÁCH TẤT CẢ NGƯỜI CHƠI (ALL PLAYERS)</h3>
+          <span class="table-count" id="table-player-count">0 người</span>
+        </div>
+
+        <div class="table-scroll-wrapper">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>PLAYER</th>
+                <th>SCORE</th>
+                <th>QUESTIONS</th>
+                <th>TREASURES</th>
+                <th>REGION</th>
+                <th>STATUS</th>
+              </tr>
+            </thead>
+            <tbody id="player-table-body">
+              <tr>
+                <td colspan="6" class="text-center">Đang chờ người chơi kết nối...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- MATCH RANKINGS / PODIUM MODAL IN ADMIN -->
+  <div id="admin-rankings-modal" class="admin-modal-overlay hidden">
+    <div class="admin-modal-card rankings-card">
+      <div class="modal-header">
+        <div class="header-top-row">
+          <div class="theme-tag gold-tag">🏆 TỔNG HỢP KẾT QUẢ</div>
+          <button class="btn-close-modal" id="btn-close-admin-rankings">&times;</button>
+        </div>
+        <h2 id="admin-rankings-title">TỔNG HỢP KẾT QUẢ</h2>
+        <p class="rankings-subtitle" id="admin-rankings-subtitle">Trận đấu 10 phút đã kết thúc! Tổng hợp kết quả các nhà thám hiểm:</p>
+      </div>
+
+      <!-- 3-STEP PODIUM -->
+      <div class="podium-section">
+        <!-- Step 2: Silver -->
+        <div class="podium-column rank-2" id="admin-podium-2">
+          <div class="podium-badge">🥈 Á QUÂN</div>
+          <div class="podium-name" id="admin-pname-2">---</div>
+          <div class="podium-score" id="admin-pscore-2">0 pts</div>
+          <div class="podium-sub" id="admin-psub-2">0 rương</div>
+          <div class="podium-block step-silver"><span class="step-num">2</span></div>
+        </div>
+
+        <!-- Step 1: Gold -->
+        <div class="podium-column rank-1" id="admin-podium-1">
+          <div class="crown-glow">👑</div>
+          <div class="podium-badge gold-badge">🥇 QUÁN QUÂN</div>
+          <div class="podium-name gold-name" id="admin-pname-1">---</div>
+          <div class="podium-score gold-score" id="admin-pscore-1">0 pts</div>
+          <div class="podium-sub" id="admin-psub-1">0 rương</div>
+          <div class="podium-block step-gold"><span class="step-num">1</span></div>
+        </div>
+
+        <!-- Step 3: Bronze -->
+        <div class="podium-column rank-3" id="admin-podium-3">
+          <div class="podium-badge bronze-badge">🥉 QUÝ QUÂN</div>
+          <div class="podium-name" id="admin-pname-3">---</div>
+          <div class="podium-score" id="admin-pscore-3">0 pts</div>
+          <div class="podium-sub" id="admin-psub-3">0 rương</div>
+          <div class="podium-block step-bronze"><span class="step-num">3</span></div>
+        </div>
+      </div>
+
+      <!-- FULL TABLE -->
+      <div class="rankings-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>HẠNG</th>
+              <th>PLAYER</th>
+              <th>ĐIỂM SỐ</th>
+              <th>RƯƠNG</th>
+              <th>ĐÚNG / SAI</th>
+              <th>KHU VỰC</th>
+            </tr>
+          </thead>
+          <tbody id="admin-rankings-table-body">
+            <!-- Dynamic rows -->
+          </tbody>
+        </table>
+      </div>
+
+      <div style="text-align:center; margin-top:16px;">
+        <button id="btn-admin-rankings-ok" class="btn-action btn-gold" style="padding:10px 24px;">Đóng Bảng Thứ Hạng</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal QR Code for Mobile Players -->
+  <div id="admin-qr-modal" class="admin-modal-overlay hidden">
+    <div class="admin-modal-card qr-modal-card">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span class="modal-icon">📱</span>
+          <h2>MÃ QR CHO ĐIỆN THOẠI THAM GIA</h2>
+        </div>
+        <button id="btn-close-qr-modal" class="btn-modal-close" title="Đóng">✕</button>
+      </div>
+
+      <div class="qr-modal-body">
+        <!-- Mode Tabs: Online 4G vs Local Wi-Fi -->
+        <div class="qr-mode-tabs">
+          <button type="button" class="btn-qr-tab active" id="tab-qr-online">
+            <span class="tab-icon">🌐</span>
+            <span>Online 4G / Toàn Cầu</span>
+          </button>
+          <button type="button" class="btn-qr-tab" id="tab-qr-lan">
+            <span class="tab-icon">🏠</span>
+            <span>Wi-Fi Cục Bộ (LAN)</span>
+          </button>
+        </div>
+
+        <p class="qr-guide-text" id="admin-qr-guide-text">
+          Bật ứng dụng <strong>Camera</strong> hoặc <strong>Zalo</strong> trên điện thoại để quét mã QR (hoạt động qua mạng 4G, 5G hoặc mọi Wi-Fi):
+        </p>
+
+        <div class="qr-image-container">
+          <img id="admin-qr-image" src="" alt="Mã QR tham gia game" style="display:none;" />
+          <div id="admin-qr-loading" class="qr-loading">Đang nạp mã QR...</div>
+        </div>
+
+        <div class="qr-link-container">
+          <div class="qr-link-label">Đường dẫn trực tiếp cho điện thoại:</div>
+          <div class="qr-link-row">
+            <input type="text" id="admin-qr-link-input" readonly value="" />
+            <button id="btn-copy-qr-link" class="btn-copy" type="button">📋 Sao chép</button>
+          </div>
+          <div id="copy-success-tip" class="copy-success-tip" style="display:none;">✔ Đã sao chép liên kết vào bộ nhớ tạm!</div>
+        </div>
+
+        <div class="qr-wifi-note">
+          💡 <em>Mẹo: Giáo viên / Quản trò có thể chiếu mã QR này lên màn hình máy chiếu để học sinh trong lớp quét tham gia cùng lúc.</em>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="admin.js?v=42"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+[
+  {
+    "id": "double_quest",
+    "name": "×2 (10đ)",
+    "type": "mul_quest_10",
+    "value": 2,
+    "description": "Nhân đôi 10 điểm câu hỏi (+20 điểm)",
+    "color": "#3B82F6",
+    "badge": "✨",
+    "weight": 20
+  },
+  {
+    "id": "double_all",
+    "name": "×2 TẤT CẢ",
+    "type": "mul_all_2",
+    "value": 2,
+    "description": "Nhân đôi TOÀN BỘ số điểm hiện có",
+    "color": "#8B5CF6",
+    "badge": "👑",
+    "weight": 14
+  },
+  {
+    "id": "plus_5",
+    "name": "+5",
+    "type": "add_5",
+    "value": 5,
+    "description": "Cộng thêm 5 điểm (+15 điểm)",
+    "color": "#10B981",
+    "badge": "🍀",
+    "weight": 22
+  },
+  {
+    "id": "minus_5",
+    "name": "-5",
+    "type": "sub_5",
+    "value": 5,
+    "description": "Trừ bớt 5 điểm (+5 điểm)",
+    "color": "#F59E0B",
+    "badge": "⚠️",
+    "weight": 18
+  },
+  {
+    "id": "zero_quest",
+    "name": "×0 (10đ)",
+    "type": "zero_quest_10",
+    "value": 0,
+    "description": "Mất trắng 10 điểm câu hỏi này (+0 điểm)",
+    "color": "#EF4444",
+    "badge": "💨",
+    "weight": 14
+  },
+  {
+    "id": "div_all",
+    "name": "÷2 TẤT CẢ",
+    "type": "div_all_2",
+    "value": 2,
+    "description": "Chia đôi TOÀN BỘ số điểm hiện có",
+    "color": "#DC2626",
+    "badge": "⚡",
+    "weight": 12
+  }
+]

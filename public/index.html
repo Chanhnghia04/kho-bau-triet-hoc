@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Kho Báu Triết Học - 2D Online Game</title>
+  <link rel="stylesheet" href="style.css?v=58">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Nunito:wght@400;600;700;800;900&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+
+  <!-- Screen Shake / Filter Wrapper -->
+  <div id="screen-shake-wrapper">
+
+    <!-- Login / Welcome Setup Modal -->
+    <div id="login-modal" class="modal-overlay active">
+      <div class="modal-card login-card" style="max-width: 680px;">
+        <div class="mythic-header">
+          <div class="rune-icon-glow">🧭</div>
+          <h1>KHO BÁU TRIẾT HỌC</h1>
+          <p class="subtitle">Thế Giới Khám Phá & Những Nghịch Lý Tư Tưởng Vĩ Đại</p>
+        </div>
+
+        <div class="character-creation-grid">
+          <!-- Left: Live Character Preview -->
+          <div class="character-preview-col">
+            <div class="preview-box-frame">
+              <canvas id="loginCharPreview" width="120" height="150"></canvas>
+            </div>
+            <div class="preview-label">NHÂN VẬT THÁM HIỂM</div>
+          </div>
+
+          <!-- Right: Customization Controls -->
+          <div class="character-controls-col">
+            <div class="form-group">
+              <label for="player-name-input">Tên Nhà Thám Hiểm:</label>
+              <input type="text" id="player-name-input" maxlength="20" placeholder="Nhập biệt danh..." value="Socrates">
+            </div>
+
+            <!-- Gender Selector -->
+            <div class="form-group">
+              <label>Giới Tính Nhân Vật:</label>
+              <div class="gender-selector">
+                <button type="button" class="btn-gender active" data-gender="male">
+                  <span class="gender-icon">👦</span>
+                  <span>Nam</span>
+                </button>
+                <button type="button" class="btn-gender" data-gender="female">
+                  <span class="gender-icon">👧</span>
+                  <span>Nữ</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Vest / Outfit Color -->
+            <div class="form-group">
+              <label>Màu Áo Gile Thám Hiểm:</label>
+              <div class="color-palette" id="outfit-color-palette">
+                <div class="color-swatch active" data-color="#10B981" style="background: #10B981;" title="Lục Rừng Sâu"></div>
+                <div class="color-swatch" data-color="#3B82F6" style="background: #3B82F6;" title="Lam Trí Tuệ"></div>
+                <div class="color-swatch" data-color="#D97706" style="background: #D97706;" title="Vàng Sa Mạc"></div>
+                <div class="color-swatch" data-color="#EF4444" style="background: #EF4444;" title="Đỏ Mạo Hiểm"></div>
+                <div class="color-swatch" data-color="#8B5CF6" style="background: #8B5CF6;" title="Tím Huyền Bí"></div>
+                <div class="color-swatch" data-color="#EC4899" style="background: #EC4899;" title="Hồng Tươi Tắn"></div>
+                <div class="color-swatch" data-color="#334155" style="background: #334155;" title="Xám Đen Ngầu"></div>
+              </div>
+            </div>
+
+            <!-- Hat Color -->
+            <div class="form-group">
+              <label>Màu Nón Thám Hiểm:</label>
+              <div class="color-palette" id="hat-color-palette">
+                <div class="hat-swatch active" data-color="#8B5A2B" style="background: #8B5A2B;" title="Nâu Da Bò"></div>
+                <div class="hat-swatch" data-color="#2E5B32" style="background: #2E5B32;" title="Xanh Safari"></div>
+                <div class="hat-swatch" data-color="#1F2937" style="background: #1F2937;" title="Đen Midnight"></div>
+                <div class="hat-swatch" data-color="#B8860B" style="background: #B8860B;" title="Vàng Khaki Cổ Điển"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile Play Instructions & QR Link (Shown on PC only) -->
+        <div class="mobile-connect-box pc-only-connect" id="login-mobile-box">
+          <div class="mobile-connect-top">
+            <div class="mobile-badge">📱 CHƠI BẰNG ĐIỆN THOẠI</div>
+            <button type="button" id="btn-login-open-qr" class="btn-qr-pill" title="Phóng to mã QR">🔍 Phóng to QR</button>
+          </div>
+          <div class="mobile-connect-body">
+            <div class="login-qr-thumb-box" id="login-qr-thumb-box" title="Bấm để phóng to mã QR">
+              <img id="login-qr-thumb-img" src="" alt="QR" style="display:none;" />
+              <div id="login-qr-spinner" class="qr-mini-spinner">⏳</div>
+            </div>
+            <div class="mobile-connect-details">
+              <div class="mobile-desc">Dùng <strong>Camera</strong> hoặc <strong>Zalo</strong> quét mã QR (chung Wi-Fi):</div>
+              <div class="mobile-ip-link" id="mobile-ip-display">Đang tìm địa chỉ IP...</div>
+            </div>
+          </div>
+        </div>
+
+        <button id="btn-start-game" class="btn-primary glow-btn">✨ BẮT ĐẦU PHIÊU LƯU ✨</button>
+        
+        <div class="login-footer">
+          <a href="/admin" target="_blank" class="admin-link">👑 Mở Radar Admin Giám Sát Realtime</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Canvas Container -->
+    <div id="game-wrapper">
+      <canvas id="gameCanvas"></canvas>
+
+      <!-- Ambient Vignette & Lighting Filter -->
+      <div id="canvas-vignette"></div>
+
+      <!-- Match Not Started / Waiting Banner Overlay -->
+      <div id="waiting-overlay">
+        <span class="waiting-icon">⏳</span>
+        <div class="waiting-text">
+          <strong>Trò Chơi Chưa Bắt Đầu</strong>
+          <span>Đang chờ Admin đếm thời gian. Nhân vật đứng yên tại chỗ.</span>
+        </div>
+      </div>
+
+      <!-- Top HUD Bar -->
+      <header id="top-hud">
+        <div class="hud-left">
+          <div class="badge-region">
+            <span class="pulse-dot"></span>
+            <span id="hud-region-name">Đồng Cỏ Tri Thức</span>
+          </div>
+          <div class="badge-online">
+            <span>👥 Online: <b id="hud-online-count">1</b></span>
+          </div>
+        </div>
+
+        <div class="hud-center">
+          <div class="match-timer-box" id="match-timer-box">
+            <div class="timer-top-label">
+              <span class="timer-pulse-icon">⏱️</span>
+              <span id="hud-timer-status" class="timer-status">CHỜ BẮT ĐẦU</span>
+            </div>
+            <div id="hud-timer-digits" class="timer-digits">10:00</div>
+          </div>
+
+          <div class="score-display">
+            <span class="score-label">ĐIỂM SỐ</span>
+            <span id="hud-score" class="score-number">0</span>
+          </div>
+        </div>
+
+        <div class="hud-right">
+          <div class="hud-stat-pill" title="Kho báu đã mở">
+            <span class="icon">🗝️</span>
+            <span id="hud-treasures">0/30</span>
+          </div>
+          <div class="hud-stat-pill" id="hud-accuracy-pill" title="Câu hỏi đúng / sai">
+            <span class="icon">🎯</span>
+            <span id="hud-accuracy">0đ / 0s</span>
+          </div>
+          <button id="btn-open-leaderboard" class="btn-icon" title="Bảng Xếp Hạng">🏆</button>
+          <button id="btn-open-player-qr" class="btn-icon" title="Mã QR cho điện thoại quét vào chơi">📱</button>
+          <button id="btn-open-wardrobe" class="btn-icon" title="Tủ đồ & Đổi trang phục / Giới tính">👗</button>
+          <button id="btn-toggle-sound" class="btn-icon" title="Bật/Tắt âm thanh">🔊</button>
+        </div>
+      </header>
+
+      <!-- Persistent Mission Completion Banner (Xuất hiện xuyên suốt khi mở đủ 30 rương) -->
+      <div id="persistent-completion-banner" class="persistent-completion-banner hidden">
+        <span class="ribbon-glow-icon">🏆</span>
+        <span class="ribbon-text">Chúc mừng bạn đã hoàn thành nhiệm vụ tìm kiếm kiến thức triết học!</span>
+        <span class="ribbon-badge">30/30 RƯƠNG</span>
+      </div>
+
+      <!-- Proximity Prompt Tooltip -->
+      <div id="proximity-prompt" class="interaction-prompt hidden">
+        <div class="prompt-key">E</div>
+        <div class="prompt-text">Ấn <kbd>E</kbd> hoặc Chạm để Mở Kho Báu</div>
+      </div>
+
+      <!-- Live Event Feed (Player actions ticker) -->
+      <div id="event-ticker" class="ticker-box">
+        <!-- Dynamically generated events -->
+      </div>
+
+      <!-- Minimap Radar in Corner -->
+      <div id="minimap-container">
+        <canvas id="minimapCanvas" width="160" height="120"></canvas>
+        <div class="minimap-label">BẢN ĐỒ THẾ GIỚI</div>
+      </div>
+
+      <!-- MOBILE CONTROLS -->
+      <!-- 1. Floating Touch Joystick Zone (Left half of screen) -->
+      <div id="touch-joystick-zone">
+        <div id="joystick-base" class="joystick-base hidden">
+          <div id="joystick-stick" class="joystick-stick"></div>
+        </div>
+      </div>
+
+      <!-- 2. Mobile Floating Action Button (Right side) -->
+      <div id="mobile-action-container">
+        <button id="mobile-interact-btn" class="mobile-action-btn">
+          <span class="btn-icon-chest">🗝️</span>
+          <span class="btn-text-chest">MỞ RƯƠNG</span>
+        </button>
+      </div>
+
+      <!-- 3. Mobile Navigation Hint -->
+      <div id="mobile-hint" class="mobile-hint">
+        <span>👆 Chạm & kéo bên trái để di chuyển</span>
+      </div>
+
+    </div>
+
+    <!-- Philosophical Question Modal -->
+    <div id="question-modal" class="modal-overlay hidden">
+      <div class="modal-card question-card">
+        <div class="modal-header">
+          <div class="header-top-row">
+            <div class="theme-tag" id="q-theme-tag">⚖️ Đạo Đức</div>
+            <button class="btn-close-modal" id="btn-close-question">&times;</button>
+          </div>
+          <h2 id="q-title">Thí nghiệm Chiếc Xe Goòng</h2>
+        </div>
+
+        <div class="scenario-box">
+          <div class="scenario-icon">📜</div>
+          <p id="q-scenario">Nội dung câu hỏi triết học...</p>
+        </div>
+
+        <div class="answers-container" id="q-options-list">
+          <!-- 4 choices generated dynamically -->
+        </div>
+
+        <div class="manual-input-box">
+          <label for="q-custom-answer">Hoặc nhập trực tiếp câu trả lời của bạn:</label>
+          <div class="input-with-btn">
+            <input type="text" id="q-custom-answer" placeholder="Nhập câu trả lời hoặc chọn lựa chọn ở trên...">
+            <button id="btn-submit-answer" class="btn-primary">XÁC NHẬN</button>
+          </div>
+        </div>
+
+        <!-- Feedback Area -->
+        <div id="q-feedback" class="feedback-banner hidden">
+          <div class="feedback-icon" id="feedback-icon">✨</div>
+          <div class="feedback-content">
+            <h4 id="feedback-title">Chính xác!</h4>
+            <p id="feedback-desc">Giải thích triết học ở đây...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4-CARD DESTINY DRAW SCREEN (Face-down until player chooses!) -->
+    <div id="card-draw-modal" class="modal-overlay hidden">
+      <div class="modal-card cards-draw-card">
+        <div class="card-draw-header">
+          <div class="sparkle-crown">✨ CÂU TRẢ LỜI CHÍNH XÁC! ✨</div>
+          <h2>4 LÁ BÀI ĐỊNH MỆNH</h2>
+          <p class="cards-subtitle">Cả 4 lá bài đang úp bí ẩn. Hãy chọn 1 lá để lật mở số phận điểm số của bạn!</p>
+        </div>
+
+        <!-- 4 Cards Slots (Face-down until picked) -->
+        <div class="cards-grid" id="cards-container">
+          <!-- 4 cards dynamically loaded here -->
+        </div>
+
+        <div class="card-status-message" id="card-status-msg">
+          👆 Chạm hoặc nhấp vào 1 lá bài bạn muốn chọn...
+        </div>
+      </div>
+    </div>
+
+    <!-- Broadcast Announcement Banner -->
+    <div id="broadcast-banner" class="announcement-banner hidden">
+      <div class="banner-title" id="banner-title">THÔNG BÁO TỪ HỆ THỐNG</div>
+      <div class="banner-text" id="banner-text">Chào mừng bạn gia nhập thế giới Triết Học!</div>
+    </div>
+
+    <!-- Mission Completed Modal (When all 30 chests are opened) -->
+    <div id="mission-completed-modal" class="modal-overlay hidden">
+      <div class="modal-card" style="max-width: 520px; text-align: center; border: 2px solid #fbbf24; box-shadow: 0 0 50px rgba(251, 191, 36, 0.5); background: rgba(13, 20, 36, 0.96); padding: 32px 24px;">
+        <div style="font-size: 58px; margin-bottom: 10px; animation: bounce 1s infinite alternate;">🏆</div>
+        <h2 style="font-family: var(--font-title); font-size: 22px; color: #fbbf24; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 14px;">NHIỆM VỤ HOÀN THÀNH</h2>
+        <div id="mission-completed-msg" style="font-size: 17px; font-weight: 700; color: #f8fafc; line-height: 1.6; margin-bottom: 22px; padding: 14px 20px; background: rgba(251, 191, 36, 0.12); border-radius: 12px; border: 1px solid rgba(251, 191, 36, 0.35);">
+          Chúc mừng bạn đã hoàn thành nhiệm vụ tìm kiếm kiến thức triết học!
+        </div>
+        <div style="display: flex; justify-content: center; gap: 12px;">
+          <button id="btn-mission-completed-close" class="btn-primary glow-btn" style="padding: 12px 36px; font-size: 15px;">XÁC NHẬN & TIẾP TỤC</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wardrobe Modal (In-game Customization) -->
+    <div id="wardrobe-modal" class="modal-overlay hidden">
+      <div class="modal-card login-card" style="max-width: 600px;">
+        <div class="modal-header">
+          <div class="header-top-row">
+            <div class="theme-tag">👗 TỦ ĐỒ NHÀ THÁM HIỂM</div>
+            <button class="btn-close-modal" id="btn-close-wardrobe">&times;</button>
+          </div>
+          <h2>THAY ĐỔI TRANG PHỤC & GIỚI TÍNH</h2>
+        </div>
+
+        <div class="character-creation-grid" style="margin-top: 14px;">
+          <!-- Left: Preview -->
+          <div class="character-preview-col">
+            <div class="preview-box-frame">
+              <canvas id="wardrobeCharPreview" width="120" height="150"></canvas>
+            </div>
+            <div class="preview-label">NGOẠI HÌNH MỚI</div>
+          </div>
+
+          <!-- Right: Controls -->
+          <div class="character-controls-col">
+            <div class="form-group">
+              <label>Giới Tính:</label>
+              <div class="gender-selector">
+                <button type="button" class="btn-wardrobe-gender active" data-gender="male">
+                  <span>👦 Nam</span>
+                </button>
+                <button type="button" class="btn-wardrobe-gender" data-gender="female">
+                  <span>👧 Nữ</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Màu Áo Gile:</label>
+              <div class="color-palette" id="wardrobe-outfit-palette">
+                <div class="color-swatch active" data-color="#10B981" style="background: #10B981;"></div>
+                <div class="color-swatch" data-color="#3B82F6" style="background: #3B82F6;"></div>
+                <div class="color-swatch" data-color="#D97706" style="background: #D97706;"></div>
+                <div class="color-swatch" data-color="#EF4444" style="background: #EF4444;"></div>
+                <div class="color-swatch" data-color="#8B5CF6" style="background: #8B5CF6;"></div>
+                <div class="color-swatch" data-color="#EC4899" style="background: #EC4899;"></div>
+                <div class="color-swatch" data-color="#334155" style="background: #334155;"></div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Màu Nón Thám Hiểm:</label>
+              <div class="color-palette" id="wardrobe-hat-palette">
+                <div class="hat-swatch active" data-color="#8B5A2B" style="background: #8B5A2B;"></div>
+                <div class="hat-swatch" data-color="#2E5B32" style="background: #2E5B32;"></div>
+                <div class="hat-swatch" data-color="#1F2937" style="background: #1F2937;"></div>
+                <div class="hat-swatch" data-color="#B8860B" style="background: #B8860B;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button id="btn-save-wardrobe" class="btn-primary" style="margin-top: 14px;">LƯU TRANG PHỤC & ĐỒNG BỘ</button>
+      </div>
+    </div>
+
+    <!-- MATCH RANKINGS & PODIUM 1-2-3 MODAL -->
+    <div id="rankings-modal" class="modal-overlay hidden">
+      <canvas id="confetti-canvas"></canvas>
+      <div class="modal-card rankings-card">
+        <div class="modal-header">
+          <div class="header-top-row">
+            <div class="theme-tag gold-tag">🏆 TỔNG HỢP KẾT QUẢ</div>
+            <button class="btn-close-modal" id="btn-close-rankings">&times;</button>
+          </div>
+          <h2 id="rankings-modal-title">TỔNG HỢP KẾT QUẢ</h2>
+          <p class="rankings-subtitle" id="rankings-modal-subtitle">Trận đấu 10 phút đã kết thúc! Tổng hợp kết quả các nhà thám hiểm:</p>
+          <div id="podium-completion-banner" class="podium-completion-banner hidden">
+            <span class="ribbon-glow-icon">✨ 🏆 ✨</span>
+            <div class="podium-ribbon-text">Chúc mừng bạn đã hoàn thành nhiệm vụ tìm kiếm kiến thức triết học!</div>
+          </div>
+        </div>
+
+        <!-- 3-STEP OLYMPIC PODIUM -->
+        <div class="podium-section" id="podium-section">
+          <!-- Step 2: Silver (Rank 2) -->
+          <div class="podium-column rank-2" id="podium-rank-2">
+            <div class="podium-badge">🥈 Á QUÂN</div>
+            <div class="podium-avatar-box">
+              <canvas id="podiumCanvas2" width="70" height="90"></canvas>
+            </div>
+            <div class="podium-name" id="podium-name-2">---</div>
+            <div class="podium-score" id="podium-score-2">0 pts</div>
+            <div class="podium-sub" id="podium-sub-2">0/30 rương</div>
+            <div class="podium-block step-silver">
+              <span class="step-num">2</span>
+            </div>
+          </div>
+
+          <!-- Step 1: Gold (Rank 1) -->
+          <div class="podium-column rank-1" id="podium-rank-1">
+            <div class="crown-glow">👑</div>
+            <div class="podium-badge gold-badge">🥇 QUÁN QUÂN</div>
+            <div class="podium-avatar-box rank-1-avatar">
+              <canvas id="podiumCanvas1" width="80" height="100"></canvas>
+            </div>
+            <div class="podium-name gold-name" id="podium-name-1">---</div>
+            <div class="podium-score gold-score" id="podium-score-1">0 pts</div>
+            <div class="podium-sub" id="podium-sub-1">0/30 rương</div>
+            <div class="podium-block step-gold">
+              <span class="step-num">1</span>
+            </div>
+          </div>
+
+          <!-- Step 3: Bronze (Rank 3) -->
+          <div class="podium-column rank-3" id="podium-rank-3">
+            <div class="podium-badge bronze-badge">🥉 QUÝ QUÂN</div>
+            <div class="podium-avatar-box">
+              <canvas id="podiumCanvas3" width="70" height="90"></canvas>
+            </div>
+            <div class="podium-name" id="podium-name-3">---</div>
+            <div class="podium-score" id="podium-score-3">0 pts</div>
+            <div class="podium-sub" id="podium-sub-3">0/30 rương</div>
+            <div class="podium-block step-bronze">
+              <span class="step-num">3</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- FULL LEADERBOARD TABLE -->
+        <div class="rankings-table-wrap">
+          <table class="rankings-table">
+            <thead>
+              <tr>
+                <th>HẠNG</th>
+                <th>NHÀ THÁM HIỂM</th>
+                <th>ĐIỂM SỐ</th>
+                <th>RƯƠNG ĐÃ MỞ</th>
+                <th>ĐÚNG / SAI</th>
+                <th>VÙNG ĐẤT</th>
+              </tr>
+            </thead>
+            <tbody id="rankings-table-body">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+
+        <div style="text-align: center; margin-top: 18px;">
+          <button id="btn-rankings-close" class="btn-primary glow-btn" style="padding: 12px 36px; font-size: 15px;">TIẾP TỤC KHÁM PHÁ</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dedicated QR Code Modal for Mobile Players -->
+    <div id="player-qr-modal" class="modal-overlay hidden">
+      <div class="modal-card qr-card" style="max-width: 460px; text-align: center;">
+        <div class="mythic-header">
+          <div class="rune-icon-glow">📱</div>
+          <h2>QUÉT QR THAM GIA GAME</h2>
+          <p class="subtitle">Dành cho điện thoại di động & máy tính bảng</p>
+        </div>
+
+        <div class="player-qr-body">
+          <p class="player-qr-guide">
+            Mở ứng dụng <strong>Camera</strong> hoặc <strong>Zalo</strong> trên điện thoại để quét mã QR bên dưới (kết nối chung mạng Wi-Fi):
+          </p>
+
+          <div class="player-qr-img-box">
+            <img id="modal-qr-code-img" src="" alt="Mã QR Chơi Game" style="display:none;" />
+            <div id="modal-qr-loading" class="qr-loading-text">Đang tạo mã QR...</div>
+          </div>
+
+          <div class="player-qr-link-box">
+            <div class="link-label">ĐƯỜNG DẪN TRỰC TIẾP (CHUNG WI-FI):</div>
+            <div class="link-row">
+              <input type="text" id="modal-qr-url-input" readonly value="" />
+              <button type="button" id="btn-copy-player-qr" class="btn-primary" style="padding: 8px 16px; font-size: 13px; white-space:nowrap;">📋 Sao chép</button>
+            </div>
+            <div id="player-copy-success" style="display:none; color:#34d399; font-size:12px; margin-top:4px; font-weight:700;">✔ Đã sao chép liên kết vào bộ nhớ tạm!</div>
+          </div>
+
+          <p class="player-qr-note">
+            💡 <em>Bạn bè hoặc học sinh có thể quét mã trực tiếp trên màn hình này để vào chơi cùng bạn ngay lập tức!</em>
+          </p>
+
+          <button type="button" id="btn-close-player-qr" class="btn-primary glow-btn" style="width:100%; margin-top:14px; padding: 12px;">ĐÓNG</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="game.js?v=58"></script>
+</body>
+</html>
