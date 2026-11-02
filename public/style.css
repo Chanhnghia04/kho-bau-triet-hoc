@@ -170,10 +170,45 @@ html, body {
   background: linear-gradient(180deg, rgba(26, 36, 60, 0.95), rgba(13, 20, 36, 0.95));
   border: 2px solid var(--gold);
   border-radius: 14px;
-  padding: 4px 22px;
+  padding: 4px 18px;
   box-shadow: 0 0 20px var(--gold-glow);
-  height: 52px;
+  min-height: 52px;
+  height: auto;
   box-sizing: border-box;
+}
+
+.hud-afk-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(239, 68, 68, 0.25);
+  border: 1px solid rgba(239, 68, 68, 0.65);
+  border-radius: 6px;
+  padding: 1px 6px;
+  margin-top: 2px;
+  font-family: var(--font-title, sans-serif);
+  font-size: 10px;
+  font-weight: 700;
+  color: #fca5a5;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.hud-afk-badge.warning {
+  background: rgba(239, 68, 68, 0.55);
+  border-color: #ef4444;
+  color: #ffffff;
+  animation: afkPulse 0.8s infinite alternate;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.9);
+}
+
+@keyframes afkPulse {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); filter: brightness(1.2); }
+}
+
+.hud-afk-badge.hidden {
+  display: none !important;
 }
 
 .score-label {
@@ -1777,6 +1812,17 @@ html, body {
    (Supports iPhone, Android, Landscape & Portrait)
    ============================================================== */
 @media (max-width: 1024px) {
+  /* Prevent iOS Safari Auto-Zoom on Inputs */
+  input[type="text"], input[type="search"], textarea, select {
+    font-size: 16px !important;
+  }
+
+  /* Global touch polish */
+  button, .option-btn, .color-swatch, .btn-gender, .mobile-action-btn, .destiny-card-wrapper {
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: transparent !important;
+  }
+
   /* 1. Login / Character Setup Screen on Mobile */
   #login-mobile-box,
   .pc-only-connect {
@@ -1785,20 +1831,22 @@ html, body {
 
   .login-card {
     max-width: 95vw !important;
-    max-height: 92dvh !important;
-    padding: 14px 16px !important;
+    max-height: 90dvh !important;
+    padding: 16px 14px !important;
     overflow-y: auto !important;
-    border-radius: 16px !important;
+    -webkit-overflow-scrolling: touch !important;
+    border-radius: 20px !important;
   }
 
   .mythic-header h1 {
-    font-size: 18px !important;
+    font-size: 19px !important;
     letter-spacing: 1px !important;
   }
 
   .mythic-header .subtitle {
-    font-size: 11px !important;
-    margin-top: 1px !important;
+    font-size: 11.5px !important;
+    margin-top: 2px !important;
+    line-height: 1.35 !important;
   }
 
   .character-creation-grid {
@@ -1807,46 +1855,51 @@ html, body {
   }
 
   .preview-box-frame {
-    width: 90px !important;
-    height: 110px !important;
+    width: 95px !important;
+    height: 115px !important;
   }
 
   .preview-box-frame canvas {
-    width: 90px !important;
-    height: 110px !important;
+    width: 95px !important;
+    height: 115px !important;
   }
 
   .character-controls-col .form-group {
-    margin-bottom: 8px !important;
+    margin-bottom: 9px !important;
   }
 
   .character-controls-col label {
-    font-size: 11px !important;
+    font-size: 11.5px !important;
     margin-bottom: 3px !important;
   }
 
   .character-controls-col input[type="text"] {
-    padding: 6px 10px !important;
-    font-size: 13px !important;
+    padding: 8px 12px !important;
+    font-size: 16px !important;
+    border-radius: 10px !important;
   }
 
   .btn-gender {
-    padding: 6px 12px !important;
-    font-size: 12px !important;
-  }
-
-  .color-swatch, .hat-swatch {
-    width: 26px !important;
-    height: 26px !important;
-  }
-
-  .btn-primary.glow-btn {
-    padding: 10px !important;
+    padding: 8px 14px !important;
     font-size: 13px !important;
     border-radius: 10px !important;
   }
 
-  /* 2. Top HUD Bar on Mobile (Zero Overlap Guaranteed) */
+  .color-swatch, .hat-swatch {
+    width: 30px !important;
+    height: 30px !important;
+    border-radius: 8px !important;
+  }
+
+  .btn-primary.glow-btn {
+    padding: 12px !important;
+    font-size: 14px !important;
+    border-radius: 12px !important;
+    font-weight: 900 !important;
+    letter-spacing: 1px !important;
+  }
+
+  /* 2. Top HUD Bar on Mobile (Crisp, zero overlap, safe area aligned) */
   #top-hud {
     position: absolute !important;
     top: calc(8px + env(safe-area-inset-top, 0px)) !important;
@@ -1867,7 +1920,6 @@ html, body {
     display: none !important;
   }
 
-  /* Center items flow naturally as the left group in flex layout */
   .hud-center {
     position: static !important;
     transform: none !important;
@@ -1879,11 +1931,12 @@ html, body {
 
   .match-timer-box {
     min-width: 0 !important;
-    height: 32px !important;
-    padding: 0 8px !important;
-    border-radius: 8px !important;
+    height: 34px !important;
+    padding: 0 10px !important;
+    border-radius: 10px !important;
     border: 1.5px solid var(--panel-border) !important;
-    background: var(--panel-bg) !important;
+    background: rgba(13, 20, 36, 0.95) !important;
+    backdrop-filter: blur(8px) !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -1903,46 +1956,75 @@ html, body {
 
   .score-display {
     min-width: 0 !important;
-    height: 32px !important;
-    padding: 0 8px !important;
-    border-radius: 8px !important;
+    height: 34px !important;
+    padding: 0 10px !important;
+    border-radius: 10px !important;
     border: 1.5px solid var(--gold) !important;
     background: linear-gradient(180deg, rgba(26, 36, 60, 0.95), rgba(13, 20, 36, 0.95)) !important;
+    backdrop-filter: blur(8px) !important;
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
-    gap: 5px !important;
+    gap: 6px !important;
   }
 
   .score-label {
-    font-size: 8px !important;
+    font-size: 9px !important;
     letter-spacing: 0.5px !important;
     line-height: 1 !important;
+    color: #fde68a !important;
   }
 
   .score-number {
-    font-size: 15px !important;
+    font-size: 16px !important;
     font-weight: 900 !important;
     line-height: 1 !important;
+    color: #ffffff !important;
+  }
+
+  /* Mobile AFK Timer Badge */
+  .hud-afk-badge {
+    height: 24px !important;
+    padding: 0 6px !important;
+    margin: 0 !important;
+    font-size: 10.5px !important;
+    font-weight: 800 !important;
+    border-radius: 6px !important;
+    background: rgba(239, 68, 68, 0.3) !important;
+    border: 1px solid rgba(239, 68, 68, 0.8) !important;
+    color: #ffffff !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 3px !important;
+    white-space: nowrap !important;
+  }
+
+  .hud-afk-badge.warning {
+    background: rgba(239, 68, 68, 0.6) !important;
+    animation: afkPulse 0.7s infinite alternate !important;
   }
 
   /* Right Action Icons */
   .hud-right {
     display: flex !important;
     align-items: center !important;
-    gap: 5px !important;
+    gap: 6px !important;
     pointer-events: auto !important;
   }
 
   .hud-stat-pill {
-    height: 32px !important;
-    padding: 0 8px !important;
-    font-size: 11px !important;
-    border-radius: 8px !important;
+    height: 34px !important;
+    padding: 0 9px !important;
+    font-size: 11.5px !important;
+    font-weight: 700 !important;
+    border-radius: 10px !important;
     box-sizing: border-box !important;
     display: flex !important;
     align-items: center !important;
     gap: 4px !important;
+    background: rgba(13, 20, 36, 0.95) !important;
+    border: 1px solid var(--panel-border) !important;
+    backdrop-filter: blur(8px) !important;
   }
 
   #hud-accuracy-pill,
@@ -1952,22 +2034,24 @@ html, body {
   }
 
   .hud-right .btn-icon {
-    width: 32px !important;
-    height: 32px !important;
-    font-size: 14px !important;
-    border-radius: 8px !important;
+    width: 34px !important;
+    height: 34px !important;
+    font-size: 15px !important;
+    border-radius: 10px !important;
     pointer-events: auto !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+    background: rgba(13, 20, 36, 0.95) !important;
+    border: 1px solid var(--panel-border) !important;
   }
 
   /* 3. Waiting Banner Overlay on Mobile */
   #waiting-overlay {
-    top: calc(48px + env(safe-area-inset-top, 0px)) !important;
+    top: calc(50px + env(safe-area-inset-top, 0px)) !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
-    padding: 5px 14px !important;
+    padding: 6px 16px !important;
     border-radius: 9999px !important;
     background: rgba(13, 20, 36, 0.95) !important;
     border: 1.5px solid var(--gold) !important;
@@ -1979,11 +2063,11 @@ html, body {
   }
 
   .waiting-icon {
-    font-size: 13px !important;
+    font-size: 14px !important;
   }
 
   .waiting-text strong {
-    font-size: 11px !important;
+    font-size: 11.5px !important;
     color: #fbbf24 !important;
   }
 
@@ -1996,55 +2080,74 @@ html, body {
     display: none !important;
   }
 
-  /* 5. Mobile Action Button (Safe Area Aware) */
+  /* 5. Mobile Action Button (Tactile 72px Floating Thumb Action) */
   #mobile-action-container {
     display: flex !important;
     position: absolute !important;
-    right: calc(16px + env(safe-area-inset-right, 0px)) !important;
-    bottom: calc(26px + env(safe-area-inset-bottom, 16px)) !important;
+    right: calc(18px + env(safe-area-inset-right, 0px)) !important;
+    bottom: calc(24px + env(safe-area-inset-bottom, 16px)) !important;
     z-index: 30 !important;
   }
 
   .mobile-action-btn {
-    width: 66px !important;
-    height: 66px !important;
+    width: 72px !important;
+    height: 72px !important;
     border-radius: 50% !important;
-    box-shadow: 0 4px 18px rgba(245, 158, 11, 0.7) !important;
+    background: linear-gradient(135deg, #f59e0b, #b45309) !important;
+    border: 2.5px solid #fef08a !important;
+    box-shadow: 0 6px 22px rgba(245, 158, 11, 0.75), inset 0 2px 6px rgba(255, 255, 255, 0.4) !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
     padding: 0 !important;
+    cursor: pointer !important;
+    touch-action: manipulation !important;
+    transition: transform 0.1s ease, filter 0.15s ease !important;
+  }
+
+  .mobile-action-btn:active {
+    transform: scale(0.90) !important;
+    filter: brightness(1.25) !important;
+  }
+
+  .mobile-action-btn.btn-dimmed {
+    opacity: 0.40 !important;
+    filter: grayscale(0.7) !important;
+    box-shadow: none !important;
   }
 
   .btn-icon-chest {
-    font-size: 24px !important;
+    font-size: 26px !important;
     line-height: 1 !important;
     margin-bottom: 2px !important;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4)) !important;
   }
 
   .btn-text-chest {
-    font-size: 9px !important;
-    font-weight: 800 !important;
+    font-size: 9.5px !important;
+    font-weight: 900 !important;
     line-height: 1 !important;
     letter-spacing: 0.5px !important;
+    color: #ffffff !important;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8) !important;
   }
 
   /* 6. Compact Minimap on Mobile */
   #minimap-container {
     display: block !important;
     position: absolute !important;
-    right: calc(16px + env(safe-area-inset-right, 0px)) !important;
-    bottom: calc(104px + env(safe-area-inset-bottom, 16px)) !important;
-    width: 92px !important;
-    height: 68px !important;
+    right: calc(18px + env(safe-area-inset-right, 0px)) !important;
+    bottom: calc(112px + env(safe-area-inset-bottom, 16px)) !important;
+    width: 96px !important;
+    height: 72px !important;
     padding: 2px !important;
-    border-radius: 8px !important;
+    border-radius: 10px !important;
     z-index: 20 !important;
-    opacity: 0.9 !important;
-    background: rgba(13, 20, 36, 0.9) !important;
-    border: 1.5px solid var(--panel-border) !important;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.7) !important;
+    opacity: 0.92 !important;
+    background: rgba(13, 20, 36, 0.92) !important;
+    border: 1.5px solid rgba(129, 140, 248, 0.5) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.7) !important;
   }
 
   #minimapCanvas {
@@ -2058,19 +2161,24 @@ html, body {
 
   /* 7. Navigation Hint & Event Ticker */
   #mobile-hint {
-    bottom: calc(16px + env(safe-area-inset-bottom, 12px)) !important;
-    left: calc(16px + env(safe-area-inset-left, 12px)) !important;
-    font-size: 10px !important;
-    padding: 3px 10px !important;
+    bottom: calc(14px + env(safe-area-inset-bottom, 10px)) !important;
+    left: calc(14px + env(safe-area-inset-left, 10px)) !important;
+    font-size: 10.5px !important;
+    padding: 4px 12px !important;
+    border-radius: 9999px !important;
+    background: rgba(13, 20, 36, 0.85) !important;
+    border: 1px solid rgba(129, 140, 248, 0.35) !important;
     z-index: 15 !important;
+    pointer-events: none !important;
   }
 
   #event-ticker {
-    bottom: calc(16px + env(safe-area-inset-bottom, 12px)) !important;
-    left: calc(16px + env(safe-area-inset-left, 12px)) !important;
-    max-width: 170px !important;
-    font-size: 9.5px !important;
-    padding: 4px 8px !important;
+    bottom: calc(14px + env(safe-area-inset-bottom, 10px)) !important;
+    left: calc(14px + env(safe-area-inset-left, 10px)) !important;
+    max-width: 180px !important;
+    font-size: 10px !important;
+    padding: 5px 10px !important;
+    border-radius: 8px !important;
     z-index: 10 !important;
     pointer-events: none !important;
   }
@@ -2078,36 +2186,64 @@ html, body {
   /* 8. Destiny Cards (2x2 grid on mobile) */
   .cards-grid {
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 8px !important;
+    gap: 10px !important;
   }
 
   .destiny-card-wrapper {
-    height: 140px !important;
+    height: 148px !important;
+    border-radius: 14px !important;
   }
 
   .destiny-card {
-    padding: 8px !important;
+    padding: 10px !important;
+    border-radius: 14px !important;
   }
 
   .card-top-badge {
-    font-size: 18px !important;
+    font-size: 20px !important;
   }
 
   .card-center-val {
-    font-size: 24px !important;
+    font-size: 25px !important;
+    font-weight: 900 !important;
   }
 
   .card-math-desc {
-    font-size: 10px !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
   }
 
-  /* 9. Question Modal & Dialog Mobile Fit */
+  /* 9. Question Modal Mobile Fit (Spacious & High Readability) */
   .question-card, #wardrobe-modal .modal-card, #leaderboard-modal .modal-card {
-    max-width: 94vw !important;
-    max-height: 90dvh !important;
-    padding: 14px !important;
+    max-width: 95vw !important;
+    max-height: 88dvh !important;
+    padding: 16px 14px 20px 14px !important;
     overflow-y: auto !important;
-    border-radius: 16px !important;
+    -webkit-overflow-scrolling: touch !important;
+    border-radius: 20px !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9), 0 0 25px rgba(99, 102, 241, 0.35) !important;
+  }
+
+  .question-card h2#q-title {
+    font-size: 17px !important;
+    font-weight: 800 !important;
+    line-height: 1.35 !important;
+    color: #fef08a !important;
+    margin: 6px 0 10px 0 !important;
+  }
+
+  .scenario-box {
+    padding: 10px 12px !important;
+    margin-bottom: 12px !important;
+    border-radius: 12px !important;
+    background: rgba(13, 20, 36, 0.85) !important;
+    border: 1px solid rgba(79, 104, 158, 0.4) !important;
+  }
+
+  #q-scenario {
+    font-size: 13.5px !important;
+    line-height: 1.5 !important;
+    color: #e2e8f0 !important;
   }
 
   .btn-close-modal {
@@ -2125,14 +2261,119 @@ html, body {
     line-height: 1 !important;
   }
 
-  .q-options-container, .answers-container {
-    gap: 8px !important;
+  .answers-container {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 9px !important;
+    margin-bottom: 8px !important;
   }
 
   .option-btn {
+    min-height: 48px !important;
     padding: 10px 12px !important;
-    font-size: 13px !important;
-    min-height: 44px !important;
+    font-size: 13.5px !important;
+    font-weight: 600 !important;
+    line-height: 1.35 !important;
+    border-radius: 12px !important;
+    background: #172238 !important;
+    border: 1.5px solid #2d3e64 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    touch-action: manipulation !important;
+    transition: all 0.15s ease !important;
+  }
+
+  .option-btn:active {
+    background: #312e81 !important;
+    border-color: #818cf8 !important;
+    transform: scale(0.98) !important;
+  }
+
+  .option-letter {
+    width: 30px !important;
+    height: 30px !important;
+    font-size: 14px !important;
+    border-radius: 8px !important;
+    background: #0d1424 !important;
+    border: 1.5px solid #38bdf8 !important;
+    color: #38bdf8 !important;
+    flex-shrink: 0 !important;
+  }
+}
+
+/* 10. Dedicated Landscape Mode on Smartphones */
+@media (max-height: 520px) and (orientation: landscape) {
+  #top-hud {
+    top: 4px !important;
+  }
+
+  .match-timer-box, .score-display, .hud-stat-pill, .hud-right .btn-icon {
+    height: 28px !important;
+  }
+
+  .modal-card {
+    max-height: 94dvh !important;
+    padding: 10px 14px !important;
+  }
+
+  .character-creation-grid {
+    display: grid !important;
+    grid-template-columns: 100px 1fr !important;
+    gap: 12px !important;
+  }
+
+  .question-card h2#q-title {
+    font-size: 15px !important;
+    margin: 4px 0 6px 0 !important;
+  }
+
+  .scenario-box {
+    padding: 6px 10px !important;
+    margin-bottom: 8px !important;
+  }
+
+  #q-scenario {
+    font-size: 12.5px !important;
+    line-height: 1.4 !important;
+  }
+
+  .answers-container {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 6px !important;
+  }
+
+  .option-btn {
+    min-height: 40px !important;
+    padding: 6px 10px !important;
+    font-size: 12px !important;
+  }
+
+  .cards-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 8px !important;
+  }
+
+  .destiny-card-wrapper {
+    height: 120px !important;
+  }
+
+  #mobile-action-container {
+    bottom: 12px !important;
+    right: 14px !important;
+  }
+
+  .mobile-action-btn {
+    width: 60px !important;
+    height: 60px !important;
+  }
+
+  #minimap-container {
+    bottom: 80px !important;
+    right: 14px !important;
+    width: 82px !important;
+    height: 60px !important;
   }
 }
 

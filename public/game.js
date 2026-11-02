@@ -565,7 +565,7 @@ const state = {
     treasureAttempts: {},
     direction: 'down',
     moving: false,
-    speed: 2,
+    speed: 3.2,
     animFrame: 0
   },
   otherPlayers: {}, // id -> { x, y, targetX, targetY, name, color, score, direction, moving, animFrame }
@@ -606,6 +606,8 @@ const mobileIpDisplay = document.getElementById('mobile-ip-display');
 const hudRegionName = document.getElementById('hud-region-name');
 const hudOnlineCount = document.getElementById('hud-online-count');
 const hudScore = document.getElementById('hud-score');
+const hudAfkBadge = document.getElementById('hud-afk-badge');
+const hudAfkText = document.getElementById('hud-afk-text');
 const hudTreasures = document.getElementById('hud-treasures');
 const hudAccuracy = document.getElementById('hud-accuracy');
 const btnToggleSound = document.getElementById('btn-toggle-sound');
@@ -1270,6 +1272,39 @@ function connectSocket() {
   });
 
   // ==========================================
+  // AFK / INACTIVITY COUNTDOWN (1 MINUTE)
+  // ==========================================
+  state.socket.on('afk_timer_tick', (data) => {
+    if (!hudAfkBadge || !hudAfkText) return;
+    if (data.active === false || !state.player || (state.player.score || 0) <= 0) {
+      hudAfkBadge.classList.add('hidden');
+      return;
+    }
+
+    hudAfkBadge.classList.remove('hidden');
+    hudAfkText.textContent = window.innerWidth <= 640 ? `${data.remainingSeconds}s` : `Mở rương: ${data.remainingSeconds}s`;
+
+    if (data.isWarning) {
+      hudAfkBadge.classList.add('warning');
+    } else {
+      hudAfkBadge.classList.remove('warning');
+    }
+  });
+
+  state.socket.on('afk_warning', (data) => {
+    try { sound.playWrongBuzz(); } catch (e) {}
+    showAnnouncement('⚠️ CẢNH BÁO ĐỨNG YÊN', data.message, 5000);
+  });
+
+  state.socket.on('player_afk_reset', (data) => {
+    try { sound.playWrongBuzz(); } catch (e) {}
+    state.player.score = data.newScore;
+    updateHUD();
+    if (hudAfkBadge) hudAfkBadge.classList.add('hidden');
+    showAnnouncement('🚨 PHẠT ĐỨNG YÊN / AFK', data.message, 8000);
+  });
+
+  // ==========================================
   // 10-MINUTE MATCH COUNTDOWN SOCKET LISTENERS
   // ==========================================
   state.socket.on('match_started', (data) => {
@@ -1409,15 +1444,22 @@ touchJoystickZone.addEventListener('touchmove', (e) => {
       let deltaX = touch.clientX - state.joystick.startX;
       let deltaY = touch.clientY - state.joystick.startY;
       const dist = Math.hypot(deltaX, deltaY);
-      const maxR = 48;
+      const maxR = 46;
+      const deadZone = 6;
 
       if (dist > maxR) {
         deltaX = (deltaX / dist) * maxR;
         deltaY = (deltaY / dist) * maxR;
       }
 
-      state.joystick.dx = deltaX / maxR;
-      state.joystick.dy = deltaY / maxR;
+      if (dist < deadZone) {
+        state.joystick.dx = 0;
+        state.joystick.dy = 0;
+      } else {
+        // 100% Full Speed Instant Vector: As soon as thumb tilts past deadzone (6px), output full directional speed
+        state.joystick.dx = deltaX / dist;
+        state.joystick.dy = deltaY / dist;
+      }
 
       joystickStick.style.left = `calc(50% + ${deltaX}px)`;
       joystickStick.style.top = `calc(50% + ${deltaY}px)`;
@@ -1982,6 +2024,7 @@ btnCloseQuestion.addEventListener('click', () => {
   questionModal.classList.remove('active');
   questionModal.classList.add('hidden');
   state.activeQuestion = null;
+  if (state.socket) state.socket.emit('cancel_question');
 });
 
 btnSubmitAnswer.addEventListener('click', () => {
@@ -2299,7 +2342,7 @@ function spawnBurstParticles(x, y, color = '#f59e0b', count = 25) {
 let lastMoveEmitTime = 0;
 let wasMoving = false;
 
-function updateMovement() {
+function updateMovement(speedMultiplier = 1) {
   const p = state.player;
   if (!p) return;
 
@@ -2320,10 +2363,13 @@ function updateMovement() {
   if (state.keys.left) dx -= 1;
   if (state.keys.right) dx += 1;
 
-  // Touch Joystick input
+  // Touch Joystick input (Normalized full speed vector)
   if (state.joystick.active) {
-    dx = state.joystick.dx;
-    dy = state.joystick.dy;
+    const jDist = Math.hypot(state.joystick.dx, state.joystick.dy);
+    if (jDist > 0.05) {
+      dx = state.joystick.dx / jDist;
+      dy = state.joystick.dy / jDist;
+    }
   }
 
   // Tap-to-walk target
@@ -2362,9 +2408,11 @@ function updateMovement() {
       if (!p.facing) p.facing = 'right';
     }
 
-    p.x = Math.max(30, Math.min(state.world.width - 30, p.x + dx * p.speed));
-    p.y = Math.max(30, Math.min(state.world.height - 30, p.y + dy * p.speed));
-    p.animFrame += 0.09;
+    const mobileBoost = state.joystick.active ? 1.20 : 1.0;
+    const finalSpeed = p.speed * mobileBoost;
+    p.x = Math.max(30, Math.min(state.world.width - 30, p.x + dx * finalSpeed * speedMultiplier));
+    p.y = Math.max(30, Math.min(state.world.height - 30, p.y + dy * finalSpeed * speedMultiplier));
+    p.animFrame += 0.13 * speedMultiplier;
 
     // Running dust particles
     if (Math.random() < 0.25) {
@@ -2410,14 +2458,20 @@ function updateMovement() {
     }
   }
 
-  // Interpolate other players
+  // Interpolate other players (Frame-rate independent lerp & lag snap)
   const now = Date.now();
   for (const id in state.otherPlayers) {
     const op = state.otherPlayers[id];
     const distToTarget = Math.hypot(op.targetX - op.x, op.targetY - op.y);
-    if (distToTarget > 1) {
-      op.x += (op.targetX - op.x) * 0.25;
-      op.y += (op.targetY - op.y) * 0.25;
+    if (distToTarget > 120) {
+      // Lag spike or teleport -> snap immediately
+      op.x = op.targetX;
+      op.y = op.targetY;
+    } else if (distToTarget > 0.5) {
+      // Fast 60% catch-up per frame so other players are rendered in near real-time without trailing behind
+      const lerpFactor = Math.min(1, 1 - Math.pow(0.40, speedMultiplier));
+      op.x += (op.targetX - op.x) * lerpFactor;
+      op.y += (op.targetY - op.y) * lerpFactor;
     } else {
       op.x = op.targetX;
       op.y = op.targetY;
@@ -2429,7 +2483,7 @@ function updateMovement() {
     }
 
     if (op.moving) {
-      op.animFrame += 0.09;
+      op.animFrame += 0.13 * speedMultiplier;
     } else {
       op.animFrame = 0;
     }
@@ -2495,9 +2549,20 @@ function updateMovement() {
   hudRegionName.textContent = curRegion;
 }
 
-// Canvas Rendering Loop
-function render() {
-  updateMovement();
+// Canvas Rendering Loop (FPS-Independent)
+let lastFrameTimestamp = performance.now();
+
+function render(currentTime) {
+  const currentNow = currentTime || performance.now();
+  let dt = (currentNow - lastFrameTimestamp) / 1000;
+  lastFrameTimestamp = currentNow;
+
+  // Robust dt clamping: ensures 60fps equivalent on all screens
+  if (dt <= 0 || isNaN(dt)) dt = 0.0166;
+  if (dt > 0.06) dt = 0.06;
+  const speedMultiplier = dt * 60;
+
+  updateMovement(speedMultiplier);
 
   ctx.fillStyle = '#080c14';
   ctx.fillRect(0, 0, canvas.width, canvas.height);

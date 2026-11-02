@@ -59,7 +59,29 @@ async function generateQRCode(url) {
   }
 }
 
+const RENDER_EXTERNAL_URL = process.env.RENDER_EXTERNAL_URL;
+
 function getNetworkPayload() {
+  if (RENDER_EXTERNAL_URL) {
+    return {
+      localIp: LOCAL_IP,
+      port: PORT,
+      lanUrl: RENDER_EXTERNAL_URL,
+      onlineUrl: RENDER_EXTERNAL_URL,
+      isOnlineMode: true,
+      mobileUrl: RENDER_EXTERNAL_URL,
+      activeUrl: RENDER_EXTERNAL_URL,
+      adminUrl: `${RENDER_EXTERNAL_URL}/admin`,
+      qrCodeDataUrl: qrCodeDataUrl,
+      tunnelState: {
+        active: true,
+        url: RENDER_EXTERNAL_URL,
+        status: 'online',
+        error: null
+      }
+    };
+  }
+
   const tState = tunnel.getTunnelState();
   const isOnline = tState.status === 'online' && Boolean(tState.url);
   const activeUrl = isOnline ? tState.url : `http://${LOCAL_IP}:${PORT}`;
@@ -89,12 +111,18 @@ function onTunnelStatusUpdate(tState) {
   });
 }
 
-// Generate local QR code immediately, then start Cloudflare Tunnel in background
-generateQRCode(`http://${LOCAL_IP}:${PORT}`).then(() => {
-  tunnel.startTunnel(PORT, onTunnelStatusUpdate).catch(err => {
-    console.warn('[TUNNEL] Không thể tự động kết nối tunnel:', err.message);
+// Generate QR code and initialize tunnel (bypasses tunnel if running on Render)
+if (RENDER_EXTERNAL_URL) {
+  generateQRCode(RENDER_EXTERNAL_URL).then(() => {
+    console.log('[RENDER] Server đang chạy trực tiếp trên Render Cloud:', RENDER_EXTERNAL_URL);
   });
-});
+} else {
+  generateQRCode(`http://${LOCAL_IP}:${PORT}`).then(() => {
+    tunnel.startTunnel(PORT, onTunnelStatusUpdate).catch(err => {
+      console.warn('[TUNNEL] Không thể tự động kết nối tunnel:', err.message);
+    });
+  });
+}
 
 // Load questions and cards
 const questionsFile = path.join(__dirname, 'data', 'questions.json');
@@ -394,6 +422,108 @@ function endMatchTimer() {
   });
 }
 
+// ==========================================
+// 1-MINUTE AFK / INACTIVITY SCORE RESET SYSTEM
+// ==========================================
+const AFK_LIMIT_SECONDS = 60; // 60 seconds (1 minute)
+
+function resetPlayerScoreForInactivity(p, reason) {
+  const prevScore = p.score || 0;
+  if (prevScore <= 0) return;
+
+  p.score = 0;
+  p.lastActiveTime = Date.now();
+  p.afkWarningSent = false;
+  p.isInteractingWithChest = false;
+
+  db.upsertPlayer(p.id, { score: 0 });
+
+  const targetSocket = io.sockets.sockets.get(p.socketId);
+  if (targetSocket) {
+    targetSocket.emit('player_afk_reset', {
+      prevScore,
+      newScore: 0,
+      message: `🚨 Điểm số của bạn đã bị reset về 0 do ${reason}!`
+    });
+  }
+
+  io.to('players_room').emit('player_score_updated', {
+    playerId: p.id,
+    playerName: p.name,
+    cardName: 'Phạt không mở rương quá 1p',
+    prevScore,
+    newScore: 0
+  });
+
+  io.to('players_room').emit('broadcast_announcement', {
+    title: '⚠️ PHẠT ĐỨNG YÊN / AFK ⚠️',
+    text: `Người chơi ${p.name} đã bị reset điểm từ ${prevScore}đ về 0đ do ${reason}!`
+  });
+
+  const evt = db.addEvent('AFK_RESET', p.id, p.name, `⚠️ ${p.name} bị phạt reset điểm từ ${prevScore}đ về 0đ do ${reason}!`, prevScore, 0);
+  io.to('admin_room').emit('admin_event', evt);
+  io.to('admin_room').emit('admin_score_change', {
+    playerId: p.id,
+    playerName: p.name,
+    cardName: 'Phạt AFK',
+    prevScore,
+    newScore: 0,
+    updatedPlayer: p
+  });
+  console.log(`[AFK RESET] ${p.name} score reset from ${prevScore} to 0 due to: ${reason}`);
+}
+
+setInterval(() => {
+  if (matchState.status === 'ended') return;
+
+  const now = Date.now();
+  for (const pid in onlinePlayers) {
+    const p = onlinePlayers[pid];
+    if (!p) continue;
+
+    // Only apply if score > 0 and hasn't finished all treasures
+    if ((p.score || 0) <= 0 || p.hasCompletedAllTreasures) {
+      continue;
+    }
+
+    if (!p.lastActiveTime) {
+      p.lastActiveTime = now;
+      continue;
+    }
+
+    const elapsed = Math.floor((now - p.lastActiveTime) / 1000);
+    const remaining = Math.max(0, AFK_LIMIT_SECONDS - elapsed);
+
+    const targetSocket = io.sockets.sockets.get(p.socketId);
+
+    if (p.isInteractingWithChest) {
+      if (elapsed >= AFK_LIMIT_SECONDS) {
+        resetPlayerScoreForInactivity(p, 'quá 1 phút không hoàn thành câu hỏi ở rương');
+      }
+    } else {
+      if (targetSocket) {
+        targetSocket.emit('afk_timer_tick', {
+          active: true,
+          remainingSeconds: remaining,
+          isWarning: remaining <= 20
+        });
+
+        if (remaining <= 20 && remaining > 0 && !p.afkWarningSent) {
+          p.afkWarningSent = true;
+          targetSocket.emit('afk_warning', {
+            remainingSeconds: remaining,
+            message: `⚠️ CẢNH BÁO: Còn ${remaining}s để di chuyển đến rương tiếp theo trước khi điểm số bị reset về 0!`
+          });
+        }
+      }
+
+      if (elapsed >= AFK_LIMIT_SECONDS) {
+        resetPlayerScoreForInactivity(p, 'không di chuyển đến rương tiếp theo trong 1 phút');
+      }
+    }
+  }
+}, 1000);
+
 // Draw 4 distinct and balanced cards from card pool
 function draw4RandomCards() {
   const selectedCards = [];
@@ -472,7 +602,10 @@ io.on('connection', (socket) => {
       direction: 'down',
       facing: 'right',
       moving: false,
-      isOnline: true
+      isOnline: true,
+      lastActiveTime: Date.now(),
+      isInteractingWithChest: false,
+      afkWarningSent: false
     };
 
     socket.join('players_room');
@@ -647,6 +780,10 @@ io.on('connection', (socket) => {
     const evt = db.addEvent('TREASURE_INTERACT', playerId, p.name, `${p.name} đang mở kho báu "${treasure.name}" (${treasure.region})`);
     io.to('admin_room').emit('admin_event', evt);
 
+    p.isInteractingWithChest = true;
+    p.lastActiveTime = Date.now();
+    p.afkWarningSent = false;
+
     socket.emit('treasure_question', {
       treasureId: treasure.id,
       treasureName: treasure.name,
@@ -780,6 +917,9 @@ io.on('connection', (socket) => {
 
       if (currentAttempts >= 2) {
         // Locked after 2 failed attempts!
+        p.isInteractingWithChest = false;
+        p.lastActiveTime = Date.now();
+        p.afkWarningSent = false;
         if (!p.failedTreasures) p.failedTreasures = [];
         if (!p.failedTreasures.includes(treasureId)) {
           p.failedTreasures.push(treasureId);
@@ -931,6 +1071,9 @@ io.on('connection', (socket) => {
 
     p.score = newScore;
     p.lastCard = card.name;
+    p.isInteractingWithChest = false;
+    p.lastActiveTime = Date.now();
+    p.afkWarningSent = false;
 
     db.upsertPlayer(playerId, {
       score: newScore,
@@ -1141,6 +1284,13 @@ io.on('connection', (socket) => {
       });
       const evt = db.addEvent('ADMIN_TELEPORT', playerId, p.name, `Admin dịch chuyển ${p.name} đến (${x}, ${y}) - ${p.region}`);
       io.to('admin_room').emit('admin_event', evt);
+    }
+  });
+
+  socket.on('cancel_question', () => {
+    const playerId = activeSockets[socket.id];
+    if (playerId && onlinePlayers[playerId]) {
+      onlinePlayers[playerId].isInteractingWithChest = false;
     }
   });
 

@@ -7,7 +7,7 @@ const STORE_PATH = path.join(__dirname, 'data', 'store.json');
 const DEFAULT_TREASURES = [
   {
     "id": "t1",
-    "name": "Rương Tác giả bài báo khoa học",
+    "name": "Rương Khái niệm Kinh tế thị trường",
     "x": 450,
     "y": 380,
     "region": "Đồng Cỏ Tri Thức",
@@ -15,7 +15,7 @@ const DEFAULT_TREASURES = [
   },
   {
     "id": "t2",
-    "name": "Rương Câu hỏi trung tâm của bài báo",
+    "name": "Rương Các quy luật kinh tế khách quan",
     "x": 250,
     "y": 250,
     "region": "Đồng Cỏ Tri Thức",
@@ -23,7 +23,7 @@ const DEFAULT_TREASURES = [
   },
   {
     "id": "t3",
-    "name": "Rương Bất bình đẳng xã hội do AI",
+    "name": "Rương Cơ chế hình thành giá cả",
     "x": 820,
     "y": 280,
     "region": "Đồng Cỏ Tri Thức",
@@ -31,7 +31,7 @@ const DEFAULT_TREASURES = [
   },
   {
     "id": "t4",
-    "name": "Rương Phương pháp nghiên cứu chủ đạo",
+    "name": "Rương Động lực nâng cao năng suất",
     "x": 320,
     "y": 720,
     "region": "Đồng Cỏ Tri Thức",
@@ -39,7 +39,7 @@ const DEFAULT_TREASURES = [
   },
   {
     "id": "t5",
-    "name": "Rương Kết nối lý luận Chương III Triết học Mác – Lênin",
+    "name": "Rương Nguồn gốc của kinh tế thị trường",
     "x": 750,
     "y": 850,
     "region": "Đồng Cỏ Tri Thức",
@@ -47,7 +47,7 @@ const DEFAULT_TREASURES = [
   },
   {
     "id": "t6",
-    "name": "Rương AI dưới góc nhìn Lực lượng sản xuất",
+    "name": "Rương Khái niệm KTTT định hướng XHCN",
     "x": 1250,
     "y": 320,
     "region": "Rừng Sâu Đạo Đức",
@@ -55,7 +55,7 @@ const DEFAULT_TREASURES = [
   },
   {
     "id": "t7",
-    "name": "Rương Triết học về con người & Bản sắc qua lao động",
+    "name": "Rương Số lý do tất yếu khách quan",
     "x": 1520,
     "y": 220,
     "region": "Rừng Sâu Đạo Đức",
@@ -63,7 +63,7 @@ const DEFAULT_TREASURES = [
   },
   {
     "id": "t8",
-    "name": "Rương Thời gian tác động trọng tâm",
+    "name": "Rương Lý do tất yếu thứ nhất",
     "x": 1780,
     "y": 350,
     "region": "Rừng Sâu Đạo Đức",
@@ -71,7 +71,7 @@ const DEFAULT_TREASURES = [
   },
   {
     "id": "t9",
-    "name": "Rương Kịch bản xã hội hậu lao động",
+    "name": "Rương Điều kiện khách quan ở Việt Nam",
     "x": 1350,
     "y": 680,
     "region": "Rừng Sâu Đạo Đức",
@@ -79,7 +79,7 @@ const DEFAULT_TREASURES = [
   },
   {
     "id": "t10",
-    "name": "Rương Khái niệm Embeddedness (Tính gắn kết)",
+    "name": "Rương Cơ chế quản lý trước Đổi mới 1986",
     "x": 1680,
     "y": 820,
     "region": "Rừng Sâu Đạo Đức",
@@ -87,7 +87,7 @@ const DEFAULT_TREASURES = [
   },
   {
     "id": "t11",
-    "name": "Rương Khái niệm Thickness (Chiều sâu bản sắc)",
+    "name": "Rương Lý do tất yếu thứ hai",
     "x": 2150,
     "y": 420,
     "region": "Đền Cổ Bản Ngã",
@@ -95,7 +95,7 @@ const DEFAULT_TREASURES = [
   },
   {
     "id": "t12",
-    "name": "Rương Phân biệt Embeddedness vs Thickness",
+    "name": "Rương Lý do tất yếu thứ ba",
     "x": 2450,
     "y": 280,
     "region": "Đền Cổ Bản Ngã",
@@ -103,7 +103,7 @@ const DEFAULT_TREASURES = [
   },
   {
     "id": "t13",
-    "name": "Rương Tình huống giả định tài xế xe tải đường dài",
+    "name": "Rương Ưu thế của cơ chế thị trường",
     "x": 2650,
     "y": 450,
     "region": "Đền Cổ Bản Ngã",
@@ -111,7 +111,7 @@ const DEFAULT_TREASURES = [
   },
   {
     "id": "t14",
-    "name": "Rương Khái niệm Meaning Whack",
+    "name": "Rương Khuyết tật của kinh tế thị trường",
     "x": 2100,
     "y": 1400,
     "region": "Đền Cổ Bản Ngã (Nam)",
@@ -119,7 +119,7 @@ const DEFAULT_TREASURES = [
   },
   {
     "id": "t15",
-    "name": "Rương Khái niệm Meaning Wipe",
+    "name": "Rương Sự cần thiết của quản lý Nhà nước",
     "x": 2480,
     "y": 1650,
     "region": "Đền Cổ Bản Ngã (Nam)",
@@ -127,7 +127,7 @@ const DEFAULT_TREASURES = [
   },
   {
     "id": "t16",
-    "name": "Rương Hiện tượng Displacement (Dịch chuyển việc làm)",
+    "name": "Rương Số lượng đặc trưng cơ bản",
     "x": 2980,
     "y": 520,
     "region": "Tàn Tích Chân Lý",
@@ -135,7 +135,7 @@ const DEFAULT_TREASURES = [
   },
   {
     "id": "t17",
-    "name": "Rương Hiện tượng Destruction (Hủy diệt việc làm)",
+    "name": "Rương Đặc trưng về Mục tiêu",
     "x": 3350,
     "y": 380,
     "region": "Tàn Tích Chân Lý",
@@ -143,7 +143,7 @@ const DEFAULT_TREASURES = [
   },
   {
     "id": "t18",
-    "name": "Rương Hai phản biện chính về ý nghĩa sống",
+    "name": "Rương Mối quan hệ giữa tăng trưởng và mục tiêu xã hội",
     "x": 3200,
     "y": 750,
     "region": "Tàn Tích Chân Lý",
@@ -151,7 +151,7 @@ const DEFAULT_TREASURES = [
   },
   {
     "id": "t19",
-    "name": "Rương Nguồn ý nghĩa ngoài công việc",
+    "name": "Rương Thành phần kinh tế giữ vai trò chủ đạo",
     "x": 2950,
     "y": 1650,
     "region": "Tàn Tích Chân Lý (Nam)",
@@ -159,7 +159,7 @@ const DEFAULT_TREASURES = [
   },
   {
     "id": "t20",
-    "name": "Rương Vấn đề Accessibility Problem (Khả năng tiếp cận)",
+    "name": "Rương Vị trí của kinh tế tư nhân",
     "x": 3380,
     "y": 1950,
     "region": "Tàn Tích Chân Lý (Nam)",
@@ -167,7 +167,7 @@ const DEFAULT_TREASURES = [
   },
   {
     "id": "t21",
-    "name": "Rương Thu nhập cơ bản phổ quát (UBI)",
+    "name": "Rương Quan hệ giữa các thành phần kinh tế",
     "x": 420,
     "y": 1350,
     "region": "Hang Động Tự Do",
@@ -175,7 +175,7 @@ const DEFAULT_TREASURES = [
   },
   {
     "id": "t22",
-    "name": "Rương Mối quan hệ UBI và ý nghĩa sống",
+    "name": "Rương Công cụ quản lý của Nhà nước",
     "x": 780,
     "y": 1450,
     "region": "Hang Động Tự Do",
@@ -183,7 +183,7 @@ const DEFAULT_TREASURES = [
   },
   {
     "id": "t23",
-    "name": "Rương Đóng góp lý luận nổi bật của nghiên cứu",
+    "name": "Rương Vai trò của thị trường trong quan hệ quản lý",
     "x": 520,
     "y": 1850,
     "region": "Hang Động Tự Do",
@@ -191,7 +191,7 @@ const DEFAULT_TREASURES = [
   },
   {
     "id": "t24",
-    "name": "Rương Mở rộng trọng tâm thảo luận về AI",
+    "name": "Rương Hình thức phân phối chủ yếu",
     "x": 280,
     "y": 2200,
     "region": "Hang Động Tự Do",
@@ -199,7 +199,7 @@ const DEFAULT_TREASURES = [
   },
   {
     "id": "t25",
-    "name": "Rương Bài học hành động ở cấp độ Bản thân",
+    "name": "Rương Các hình thức phân phối kết hợp",
     "x": 750,
     "y": 2450,
     "region": "Hang Động Tự Do",
@@ -207,7 +207,7 @@ const DEFAULT_TREASURES = [
   },
   {
     "id": "t26",
-    "name": "Rương Khuyến nghị chính sách ở cấp độ Xã hội",
+    "name": "Rương Thời điểm thực hiện tiến bộ và công bằng xã hội",
     "x": 1450,
     "y": 1350,
     "region": "Hồ Nước Ý Thức",
@@ -215,7 +215,7 @@ const DEFAULT_TREASURES = [
   },
   {
     "id": "t27",
-    "name": "Rương Bản chất dự báo của nghiên cứu Scripter",
+    "name": "Rương Thành tựu cốt lõi của mô hình",
     "x": 1720,
     "y": 1550,
     "region": "Hồ Nước Ý Thức",
@@ -223,7 +223,7 @@ const DEFAULT_TREASURES = [
   },
   {
     "id": "t28",
-    "name": "Rương Liên hệ Chương III Chủ nghĩa duy vật lịch sử",
+    "name": "Rương Đánh giá chỉ tiêu tăng trưởng GDP",
     "x": 1320,
     "y": 1850,
     "region": "Hồ Nước Ý Thức",
@@ -231,7 +231,7 @@ const DEFAULT_TREASURES = [
   },
   {
     "id": "t29",
-    "name": "Rương Thuộc tính cốt lõi của Meaning Whack",
+    "name": "Rương Những hạn chế và thách thức thực tế",
     "x": 1680,
     "y": 2150,
     "region": "Hồ Nước Ý Thức",
@@ -239,7 +239,7 @@ const DEFAULT_TREASURES = [
   },
   {
     "id": "t30",
-    "name": "Rương Thông điệp cốt lõi của bài học",
+    "name": "Rương Bản chất đúc kết của mô hình",
     "x": 1400,
     "y": 2480,
     "region": "Hồ Nước Ý Thức",
