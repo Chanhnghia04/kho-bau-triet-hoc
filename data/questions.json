@@ -3,7 +3,7 @@
     "id": "q1",
     "theme": "Phần 1: Khái niệm & Bản chất KTTT",
     "title": "Khái niệm Kinh tế thị trường",
-    "scenario": "Theo lý luận kinh tế chính trị, kinh tế thị trường được định nghĩa là gì?",
+    "scenario": "Khái niệm kinh tế thị trường được hiểu là:",
     "options": [
       "Nền kinh tế tự cấp tự túc ở trình độ sơ khai",
       "Nền kinh tế hàng hóa phát triển ở trình độ cao",
@@ -32,95 +32,91 @@
     "correctIndex": 0,
     "keywords": [
       "quy luật giá trị",
-      "cung - cầu",
+      "cung – cầu",
       "cạnh tranh",
       "A"
     ],
-    "explanation": "Kinh tế thị trường chịu sự chi phối tất yếu của các quy luật thị trường khách quan như quy luật giá trị, cung - cầu và cạnh tranh."
+    "explanation": "Kinh tế thị trường chịu sự chi phối tất yếu của các quy luật thị trường khách quan như quy luật giá trị, cung – cầu và cạnh tranh."
   },
   {
     "id": "q3",
     "theme": "Phần 1: Khái niệm & Bản chất KTTT",
     "title": "Cơ chế hình thành giá cả",
-    "scenario": "Trong nền kinh tế thị trường, giá cả hàng hóa được hình thành chủ yếu thông qua yếu tố nào?",
+    "scenario": "Trong nền kinh tế thị trường thuần túy, giá cả được hình thành chủ yếu thông qua yếu tố nào?",
     "options": [
-      "Quyết định áp đặt cố định từ cơ quan quản lý hành chính",
-      "Sự thỏa thuận ngầm giữa các hiệp hội độc quyền",
-      "Quan hệ thị trường và sự tác động của cung – cầu",
-      "Kế hoạch định giá có sẵn từ trước của các tổ chức xã hội"
+      "Quyết định áp đặt cố định từ cơ quan quản lý",
+      "Sự thỏa thuận ngầm giữa các nhóm độc quyền",
+      "Quan hệ thị trường",
+      "Kế hoạch định trước của các tổ chức xã hội"
     ],
     "correctIndex": 2,
     "keywords": [
       "quan hệ thị trường",
-      "cung - cầu",
       "C"
     ],
-    "explanation": "Trong nền kinh tế thị trường, giá cả được hình thành chủ yếu thông qua các mối quan hệ thị trường và sự tương tác cung - cầu."
+    "explanation": "Trong nền kinh tế thị trường thuần túy, giá cả được hình thành chủ yếu thông qua quan hệ thị trường."
   },
   {
     "id": "q4",
     "theme": "Phần 1: Khái niệm & Bản chất KTTT",
     "title": "Động lực nâng cao năng suất",
-    "scenario": "Yếu tố nào trong nền kinh tế thị trường đóng vai trò tạo động lực nâng cao năng suất lao động và chất lượng sản phẩm?",
+    "scenario": "Yếu tố nào trong nền kinh tế thị trường đóng vai trò tạo động lực nâng cao năng suất và chất lượng sản phẩm?",
     "options": [
-      "Độc quyền nhà nước tuyệt đối",
-      "Chế độ bao cấp bình quân",
-      "Cạnh tranh giữa các chủ thể kinh tế",
-      "Trợ cấp tài chính không hoàn lại"
+      "Độc quyền nhà nước",
+      "Bao cấp xã hội",
+      "Cạnh tranh",
+      "Trợ cấp tài chính"
     ],
     "correctIndex": 2,
     "keywords": [
       "cạnh tranh",
-      "năng suất",
-      "chất lượng",
       "C"
     ],
-    "explanation": "Cạnh tranh lành mạnh buộc các chủ thể sản xuất phải cải tiến kỹ thuật, nâng cao năng suất và chất lượng để tồn tại và phát triển."
+    "explanation": "Cạnh tranh lành mạnh là động lực thúc đẩy cải tiến công nghệ, nâng cao năng suất và chất lượng sản phẩm."
   },
   {
     "id": "q5",
     "theme": "Phần 1: Khái niệm & Bản chất KTTT",
     "title": "Nguồn gốc của kinh tế thị trường",
-    "scenario": "Quan điểm nào sau đây là đúng đắn về nguồn gốc và bản chất của kinh tế thị trường?",
+    "scenario": "Quan điểm nào sau đây là đúng đắn về nguồn gốc của kinh tế thị trường?",
     "options": [
       "Kinh tế thị trường là sản phẩm riêng có của chủ nghĩa tư bản",
-      "Kinh tế thị trường là thành tựu phát triển của nền sản xuất hàng hóa",
+      "Kinh tế thị trường là thành tựu phát triển chung của nền sản xuất hàng hóa",
       "Kinh tế thị trường chỉ xuất hiện trong thời kỳ quá độ lên chủ nghĩa xã hội",
-      "Kinh tế thị trường do Nhà nước chủ quan tự ý áp đặt ra"
+      "Kinh tế thị trường do Nhà nước chủ quan tạo ra theo ý muốn"
     ],
     "correctIndex": 1,
     "keywords": [
-      "thành tựu phát triển",
+      "thành tựu phát triển chung",
       "nền sản xuất hàng hóa",
       "B"
     ],
-    "explanation": "Kinh tế thị trường không phải sản phẩm riêng của chủ nghĩa tư bản mà là thành tựu phát triển văn minh của nhân loại qua nền sản xuất hàng hóa."
+    "explanation": "Kinh tế thị trường là thành tựu phát triển chung của nền sản xuất hàng hóa của nhân loại, không phải sản phẩm riêng có của CNTB."
   },
   {
     "id": "q6",
     "theme": "Phần 1: Khái niệm & Bản chất KTTT",
-    "title": "Khái niệm KTTT định hướng XHCN",
-    "scenario": "Theo giáo trình Kinh tế chính trị Mác – Lênin, nền KTTT định hướng XHCN ở Việt Nam chịu sự điều tiết của chủ thể nào?",
+    "title": "Chủ thể điều tiết KTTT định hướng XHCN",
+    "scenario": "Theo định nghĩa trong giáo trình, nền kinh tế thị trường định hướng XHCN ở Việt Nam có sự điều tiết của chủ thể nào?",
     "options": [
-      "Các tổ chức kinh tế phi chính phủ quốc tế",
-      "Bàn tay vô hình của thị trường tự do hoàn toàn",
-      "Nhà nước pháp quyền do Đảng Cộng sản Việt Nam lãnh đạo",
-      "Các tập đoàn tư nhân đa quốc gia"
+      "Do các tập đoàn tư nhân đa quốc gia điều tiết hoàn toàn",
+      "Có sự điều tiết của thị trường tự do tuyệt đối",
+      "Có sự điều tiết của Nhà nước do Đảng Cộng sản Việt Nam lãnh đạo",
+      "Không cần bất kỳ sự can thiệp hay điều tiết nào"
     ],
     "correctIndex": 2,
     "keywords": [
       "Nhà nước",
-      "Đảng Cộng sản",
-      "điều tiết",
+      "Đảng Cộng sản Việt Nam",
       "C"
     ],
-    "explanation": "KTTT định hướng XHCN ở Việt Nam có sự quản lý và điều tiết của Nhà nước đặt dưới sự lãnh đạo của Đảng Cộng sản Việt Nam."
+    "explanation": "KTTT định hướng XHCN vận hành theo các quy luật thị trường có sự điều tiết của Nhà nước do Đảng Cộng sản Việt Nam lãnh đạo."
   },
   {
     "id": "q7",
     "theme": "Phần 2: Tính tất yếu khách quan",
-    "title": "Số lý do tất yếu khách quan",
-    "scenario": "Theo giáo trình, có mấy lý do cơ bản dẫn đến tính tất yếu khách quan của việc phát triển KTTT định hướng XHCN ở Việt Nam?",
+    "title": "Số lượng lý do tính tất yếu",
+    "scenario": "Theo giáo trình, có mấy lý do cơ bản khẳng định tính tất yếu khách quan của việc phát triển kinh tế thị trường định hướng XHCN ở Việt Nam?",
     "options": [
       "2 lý do",
       "3 lý do",
@@ -130,139 +126,136 @@
     "correctIndex": 1,
     "keywords": [
       "3 lý do",
-      "ba lý do",
       "B"
     ],
-    "explanation": "Giáo trình nêu rõ 3 lý do: Phù hợp xu thế khách quan; có ưu thế thúc đẩy phát triển; và phù hợp nguyện vọng của nhân dân."
+    "explanation": "Giáo trình khẳng định có 3 lý do cơ bản về tính tất yếu khách quan của việc phát triển KTTT định hướng XHCN ở Việt Nam."
   },
   {
     "id": "q8",
     "theme": "Phần 2: Tính tất yếu khách quan",
-    "title": "Lý do tất yếu thứ nhất",
-    "scenario": "Lý do thứ nhất khẳng định tính tất yếu phát triển KTTT định hướng XHCN ở Việt Nam là gì?",
+    "title": "Lý do thứ nhất: Xu thế khách quan",
+    "scenario": "Lý do thứ nhất khẳng định tính tất yếu khách quan của mô hình kinh tế thị trường định hướng XHCN ở Việt Nam là gì?",
     "options": [
-      "Nhằm mục đích tư nhân hóa toàn bộ các tư liệu sản xuất",
-      "Để từng bước đưa đất nước theo mô hình tư bản cổ điển",
-      "Phù hợp với xu hướng phát triển khách quan trong bối cảnh thế giới hiện nay",
-      "Do áp lực và yêu cầu bắt buộc từ các thể chế tài chính phương Tây"
+      "Nhằm xóa bỏ hoàn toàn khu vực kinh tế nhà nước",
+      "Để đưa nền kinh tế đi theo mô hình tư bản chủ nghĩa cổ điển",
+      "Phù hợp với xu hướng phát triển khách quan của Việt Nam trong bối cảnh thế giới hiện nay",
+      "Do sự áp đặt bắt buộc từ các tổ chức quốc tế"
     ],
     "correctIndex": 2,
     "keywords": [
       "xu hướng phát triển khách quan",
-      "bối cảnh thế giới",
       "C"
     ],
-    "explanation": "Lý do thứ nhất là phát triển KTTT phù hợp với xu hướng phát triển khách quan của Việt Nam trong bối cảnh thế giới hiện nay."
+    "explanation": "Lý do thứ nhất: Phát triển KTTT định hướng XHCN là phù hợp với xu hướng phát triển khách quan của Việt Nam trong bối cảnh thế giới hiện nay."
   },
   {
     "id": "q9",
     "theme": "Phần 2: Tính tất yếu khách quan",
-    "title": "Điều kiện khách quan ở Việt Nam",
-    "scenario": "Đâu là những điều kiện khách quan làm cho sự tồn tại và phát triển của KTTT ở Việt Nam là tất yếu?",
+    "title": "Điều kiện tồn tại của kinh tế thị trường",
+    "scenario": "Đâu là những điều kiện khách quan cho sự tồn tại và phát triển của kinh tế thị trường ở Việt Nam?",
     "options": [
-      "Nền kinh tế chỉ có một hình thức sở hữu duy nhất",
+      "Nền sản xuất tự nhiên chiếm ưu thế và không có trao đổi",
       "Phân công lao động xã hội, nhiều hình thức sở hữu và nhu cầu trao đổi giữa các chủ thể",
-      "Sự biến mất hoàn toàn của quan hệ hàng hóa - tiền tệ",
-      "Việc triệt tiêu toàn bộ sự tự chủ kinh doanh của các doanh nghiệp"
+      "Chỉ có duy nhất một hình thức sở hữu toàn dân",
+      "Triệt tiêu hoàn toàn sự cạnh tranh giữa các thành phần kinh tế"
     ],
     "correctIndex": 1,
     "keywords": [
       "phân công lao động",
       "nhiều hình thức sở hữu",
-      "nhu cầu trao đổi",
       "B"
     ],
-    "explanation": "Sự phân công lao động xã hội sâu sắc cùng sự tồn tại của nhiều hình thức sở hữu tạo nên cơ sở khách quan cho kinh tế thị trường."
+    "explanation": "KTTT tồn tại do các điều kiện: phân công lao động xã hội, đa dạng hình thức sở hữu và sự độc lập tương đối về kinh tế giữa các chủ thể."
   },
   {
     "id": "q10",
     "theme": "Phần 2: Tính tất yếu khách quan",
-    "title": "Cơ chế quản lý trước Đổi mới 1986",
-    "scenario": "Trước công cuộc Đổi mới năm 1986, nền kinh tế Việt Nam vận hành chủ yếu theo cơ chế nào?",
+    "title": "Cơ chế kinh tế trước Đổi mới",
+    "scenario": "Trước thời kỳ Đổi mới (1986), nền kinh tế Việt Nam vận hành chủ yếu theo cơ chế nào?",
     "options": [
-      "Cơ chế thị trường tự do cạnh tranh hoàn hảo",
+      "Cơ chế thị trường tự do cạnh tranh",
       "Cơ chế kế hoạch hóa tập trung, quan liêu, bao cấp",
-      "Cơ chế kinh tế hỗn hợp đa thành phần",
-      "Cơ chế kinh tế mở định hướng xuất khẩu tư bản"
+      "Cơ chế kinh tế hỗn hợp hiện đại",
+      "Cơ chế kinh tế thị trường xã hội kiểu Bắc Âu"
     ],
     "correctIndex": 1,
     "keywords": [
       "kế hoạch hóa tập trung",
-      "quan liêu",
-      "bao cấp",
+      "quan liêu bao cấp",
       "B"
     ],
-    "explanation": "Trước Đổi mới 1986, nước ta áp dụng cơ chế kế hoạch hóa tập trung, quan liêu, bao cấp bộc lộ nhiều hạn chế về động lực phát triển."
+    "explanation": "Trước Đổi mới 1986, nước ta áp dụng cơ chế kế hoạch hóa tập trung, quan liêu, bao cấp dẫn đến trì trệ và khủng hoảng kinh tế - xã hội."
   },
   {
     "id": "q11",
     "theme": "Phần 2: Tính tất yếu khách quan",
-    "title": "Lý do tất yếu thứ hai",
-    "scenario": "Lý do thứ hai khẳng định sự cần thiết của KTTT định hướng XHCN xuất phát từ điều gì?",
+    "title": "Lý do thứ hai: Ưu thế của thị trường",
+    "scenario": "Lý do thứ hai khẳng định tính tất yếu phát triển kinh tế thị trường định hướng XHCN ở Việt Nam xuất phát từ:",
     "options": [
-      "KTTT có những ưu thế thúc đẩy phát triển to lớn đối với Việt Nam",
-      "Việc thị trường tự động xóa bỏ mọi sự phân hóa giàu nghèo",
-      "Sự suy giảm hoàn toàn của vai trò quản lý nhà nước",
-      "Nhu cầu tăng cường bao cấp tài chính cho toàn xã hội"
+      "Những ưu thế thúc đẩy phát triển to lớn của kinh tế thị trường đối với Việt Nam",
+      "Sự suy tàn của tất cả các hình thức quản lý nhà nước",
+      "Nhu cầu duy trì sự bao cấp của ngân sách nhà nước",
+      "Việc thị trường tự động giải quyết được triệt để phân hóa giàu nghèo"
     ],
     "correctIndex": 0,
     "keywords": [
       "ưu thế thúc đẩy phát triển",
-      "động lực",
       "A"
     ],
-    "explanation": "Kinh tế thị trường có ưu thế kích thích đổi mới công nghệ, nâng cao năng suất và giải phóng sức sản xuất cho đất nước."
+    "explanation": "Lý do thứ hai: Kinh tế thị trường có những ưu thế to lớn trong việc kích thích sản xuất, đổi mới công nghệ và phân bổ nguồn lực."
   },
   {
     "id": "q12",
     "theme": "Phần 2: Tính tất yếu khách quan",
-    "title": "Lý do tất yếu thứ ba",
-    "scenario": "Lý do thứ ba về tính tất yếu phát triển KTTT định hướng XHCN ở Việt Nam dựa trên căn cứ nào?",
+    "title": "Lý do thứ ba: Nguyện vọng của nhân dân",
+    "scenario": "Lý do thứ ba về tính tất yếu khách quan của mô hình xuất phát từ:",
     "options": [
-      "Phù hợp với nguyện vọng của nhân dân về xã hội dân giàu, nước mạnh, dân chủ, công bằng, văn minh",
-      "Thả nổi thị trường để cá nhân tối đa hóa lợi nhuận mà không cần quan tâm đến cộng đồng",
-      "Triệt tiêu mọi chính sách an sinh xã hội để giảm tải cho ngân sách",
-      "Nhằm chuyển giao toàn bộ tài sản công cho các tổ chức nước ngoài"
+      "Nguyện vọng của nhân dân về một xã hội dân giàu, nước mạnh, dân chủ, công bằng, văn minh",
+      "Yêu cầu thả nổi giá cả theo ý muốn của các nhà sản xuất",
+      "Mong muốn tối đa hóa lợi nhuận cho khu vực tư nhân",
+      "Mục đích tách rời phát triển kinh tế khỏi các chính sách xã hội"
     ],
     "correctIndex": 0,
     "keywords": [
-      "nguyện vọng của nhân dân",
-      "dân giàu, nước mạnh",
+      "dân giàu",
+      "nước mạnh",
+      "dân chủ",
       "công bằng",
+      "văn minh",
       "A"
     ],
-    "explanation": "Mô hình phù hợp với nguyện vọng chính đáng của nhân dân ta về một xã hội dân giàu, nước mạnh, dân chủ, công bằng, văn minh."
+    "explanation": "Lý do thứ ba: Phù hợp với nguyện vọng của nhân dân ta về một xã hội dân giàu, nước mạnh, dân chủ, công bằng, văn minh."
   },
   {
     "id": "q13",
-    "theme": "Phần 3: Ưu thế & Khuyết tật của KTTT",
+    "theme": "Phần 3: Ưu thế & Hạn chế của thị trường",
     "title": "Ưu thế của cơ chế thị trường",
-    "scenario": "Theo lý luận kinh tế, ưu thế nổi bật nhất của cơ chế thị trường là gì?",
+    "scenario": "Ưu thế thúc đẩy phát triển của cơ chế thị trường bao gồm:",
     "options": [
-      "Đảm bảo sự bình quân tuyệt đối về mức hưởng thụ của mọi thành viên",
-      "Tạo động lực đổi mới công nghệ, nâng cao năng suất, hạ giá thành và huy động nguồn lực",
-      "Tự động giải quyết triệt để các vấn đề môi trường sinh thái",
-      "Loại trừ hoàn toàn mọi rủi ro phá sản trong kinh doanh"
+      "Tự động bảo đảm sự bình đẳng thu nhập tuyệt đối giữa mọi người",
+      "Triệt tiêu các rủi ro khủng hoảng và ô nhiễm môi trường",
+      "Tạo động lực đổi mới công nghệ, nâng cao năng suất, giảm chi phí và huy động nguồn lực",
+      "Xóa bỏ hoàn toàn quy luật giá trị và quy luật cung cầu"
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "keywords": [
       "đổi mới công nghệ",
       "nâng cao năng suất",
-      "huy động nguồn lực",
-      "B"
+      "giảm chi phí",
+      "C"
     ],
-    "explanation": "Cơ chế thị trường kích thích động lực đổi mới, nâng cao năng suất và phân bổ linh hoạt các nguồn lực xã hội."
+    "explanation": "Thị trường tạo động lực mạnh mẽ cho đổi mới kỹ thuật, tăng năng suất, giảm chi phí và phân bổ linh hoạt các nguồn lực xã hội."
   },
   {
     "id": "q14",
-    "theme": "Phần 3: Ưu thế & Khuyết tật của KTTT",
-    "title": "Khuyết tật của kinh tế thị trường",
-    "scenario": "Những mặt trái, khuyết tật vốn có của cơ chế thị trường bao gồm những hiện tượng nào?",
+    "theme": "Phần 3: Ưu thế & Hạn chế của thị trường",
+    "title": "Khuyết tật của cơ chế thị trường",
+    "scenario": "Đâu là những khuyết tật, mặt trái vốn có của cơ chế thị trường được nhắc tới trong bài thuyết trình?",
     "options": [
-      "Kìm hãm hoàn toàn sự phát triển của công nghệ mới",
-      "Cạnh tranh không lành mạnh, phân hóa giàu nghèo và suy thoái môi trường",
-      "Triệt tiêu hoàn toàn động lực làm việc của người lao động",
-      "Không thể tạo ra sự trao đổi mua bán hàng hóa"
+      "Tự động duy trì công bằng xã hội và bảo vệ tài nguyên",
+      "Cạnh tranh không lành mạnh, phân hóa giàu nghèo và tác động tiêu cực đến môi trường",
+      "Làm giảm năng lực sản xuất và kìm hãm đổi mới công nghệ",
+      "Luôn phân bổ nguồn lực đồng đều cho mọi tầng lớp nhân dân"
     ],
     "correctIndex": 1,
     "keywords": [
@@ -271,18 +264,18 @@
       "môi trường",
       "B"
     ],
-    "explanation": "Thị trường tự do luôn chứa đựng khuyết tật: chạy theo lợi nhuận dẫn đến phân hóa xã hội, cạnh tranh tiêu cực và phá hủy môi trường."
+    "explanation": "Mặt trái của thị trường gồm: cạnh tranh không lành mạnh, phân hóa giàu nghèo, cạn kiệt tài nguyên và suy thoái môi trường."
   },
   {
     "id": "q15",
-    "theme": "Phần 3: Ưu thế & Khuyết tật của KTTT",
+    "theme": "Phần 3: Ưu thế & Hạn chế của thị trường",
     "title": "Sự cần thiết của quản lý Nhà nước",
-    "scenario": "Tại sao trong nền kinh tế thị trường định hướng XHCN, Nhà nước phải thực hiện vai trò quản lý?",
+    "scenario": "Vì sao không thể để kinh tế thị trường tự do điều tiết hoàn toàn mà cần có sự quản lý của Nhà nước?",
     "options": [
-      "Để thay thế toàn bộ các quy luật thị trường bằng mệnh lệnh hành chính",
-      "Nhằm phát huy mặt tích cực và khắc phục, hạn chế các khuyết tật của thị trường",
-      "Để triệt tiêu hoàn toàn quyền tự chủ sản xuất kinh doanh của doanh nghiệp",
-      "Vì thị trường hoàn toàn không có khả năng kích thích sản xuất"
+      "Vì thị trường tự do không thể tạo ra bất kỳ sự cạnh tranh nào",
+      "Để phát huy các mặt tích cực và hạn chế, khắc phục những khuyết tật của cơ chế thị trường",
+      "Để triệt tiêu quyền tự chủ sản xuất, kinh doanh của các doanh nghiệp",
+      "Vì cơ chế thị trường hoàn toàn không có khả năng phân bổ nguồn lực"
     ],
     "correctIndex": 1,
     "keywords": [
@@ -290,13 +283,13 @@
       "khắc phục khuyết tật",
       "B"
     ],
-    "explanation": "Nhà nước quản lý để điều tiết, khắc phục những mặt trái/thất bại của thị trường và định hướng nền kinh tế phục vụ lợi ích nhân dân."
+    "explanation": "Nhà nước quản lý để định hướng xã hội chủ nghĩa, phát huy mặt tích cực và khắc phục những thất bại, khuyết tật của cơ chế thị trường."
   },
   {
     "id": "q16",
     "theme": "Phần 4: Năm đặc trưng cơ bản",
     "title": "Số lượng đặc trưng cơ bản",
-    "scenario": "Theo giáo trình Kinh tế chính trị Mác – Lênin, mô hình KTTT định hướng XHCN ở Việt Nam có bao nhiêu đặc trưng cơ bản?",
+    "scenario": "Mô hình kinh tế thị trường định hướng XHCN ở Việt Nam có bao nhiêu đặc trưng cơ bản theo giáo trình?",
     "options": [
       "3 đặc trưng",
       "4 đặc trưng",
@@ -306,99 +299,95 @@
     "correctIndex": 2,
     "keywords": [
       "5 đặc trưng",
-      "năm đặc trưng",
       "C"
     ],
-    "explanation": "Bao gồm 5 đặc trưng: Mục tiêu; Quan hệ sở hữu & thành phần; Quan hệ quản lý; Quan hệ phân phối; Tăng trưởng gắn với công bằng xã hội."
+    "explanation": "Mô hình có 5 đặc trưng: Về mục tiêu; Về quan hệ sở hữu và thành phần kinh tế; Về quan hệ quản lý; Về quan hệ phân phối; Về gắn tăng trưởng kinh tế với tiến bộ, công bằng xã hội."
   },
   {
     "id": "q17",
     "theme": "Phần 4: Năm đặc trưng cơ bản",
-    "title": "Đặc trưng về Mục tiêu",
-    "scenario": "Đặc trưng về mục tiêu của KTTT định hướng XHCN ở Việt Nam hướng tới nội dung nào?",
+    "title": "Đặc trưng về mục tiêu phát triển",
+    "scenario": "Về mục tiêu, kinh tế thị trường định hướng XHCN ở Việt Nam hướng tới:",
     "options": [
-      "Tối đa hóa lợi nhuận tài chính cho giai cấp thống trị",
-      "Phát triển lực lượng sản xuất, xây dựng cơ sở vật chất của CNXH, nâng cao đời sống nhân dân",
-      "Chỉ tập trung vào công tác xuất khẩu nguyên liệu thô ra nước ngoài",
-      "Xóa bỏ hoàn toàn nền sản xuất hàng hóa để quay về tự cung tự cấp"
+      "Tăng trưởng GDP bằng mọi giá mà không cần quan tâm đến môi trường",
+      "Tối đa hóa lợi nhuận cho các nhà đầu tư nước ngoài",
+      "Phát triển lực lượng sản xuất, xây dựng cơ sở vật chất – kỹ thuật của CNXH, nâng cao đời sống nhân dân",
+      "Xóa bỏ cơ chế cạnh tranh và thị trường hàng hóa"
     ],
-    "correctIndex": 1,
+    "correctIndex": 2,
     "keywords": [
-      "lực lượng sản xuất",
-      "cơ sở vật chất",
-      "đời sống nhân dân",
-      "B"
+      "phát triển lực lượng sản xuất",
+      "nâng cao đời sống nhân dân",
+      "C"
     ],
-    "explanation": "Mục tiêu là giải phóng và phát triển lực lượng sản xuất, xây dựng cơ sở vật chất - kỹ thuật cho CNXH, nâng cao đời sống mọi tầng lớp nhân dân."
+    "explanation": "Mục tiêu là phát triển lực lượng sản xuất, xây dựng cơ sở vật chất - kỹ thuật của CNXH, thực hiện dân giàu, nước mạnh, dân chủ, công bằng, văn minh."
   },
   {
     "id": "q18",
     "theme": "Phần 4: Năm đặc trưng cơ bản",
-    "title": "Mối quan hệ giữa tăng trưởng và mục tiêu xã hội",
-    "scenario": "Quan điểm nào sau đây phản ánh đúng mục tiêu phát triển kinh tế thị trường định hướng XHCN?",
+    "title": "Mối quan hệ mục tiêu kinh tế - xã hội",
+    "scenario": "Quan điểm nào sau đây phản ánh đúng đặc trưng về mục tiêu phát triển kinh tế ở Việt Nam?",
     "options": [
-      "Tăng trưởng kinh tế là mục đích tự thân, duy nhất và tối cao",
-      "Tăng trưởng kinh tế phải đi cùng nâng cao chất lượng cuộc sống, tiến bộ và công bằng xã hội",
-      "Chỉ quan tâm đến phúc lợi xã hội sau khi nền kinh tế đã phát triển tuyệt đối",
-      "Hy sinh các mục tiêu xã hội để bảo vệ lợi nhuận tuyệt đối của doanh nghiệp"
+      "Tăng trưởng kinh tế là mục tiêu duy nhất và tối cao",
+      "Tăng trưởng kinh tế phải đi cùng nâng cao chất lượng cuộc sống, thực hiện tiến bộ và công bằng xã hội",
+      "Chỉ tập trung thực hiện công bằng xã hội sau khi nền kinh tế đã phát triển tuyệt đối",
+      "Hy sinh an sinh xã hội để dồn toàn bộ nguồn lực cho lợi nhuận doanh nghiệp"
     ],
     "correctIndex": 1,
     "keywords": [
       "chất lượng cuộc sống",
-      "tiến bộ",
-      "công bằng xã hội",
+      "tiến bộ và công bằng xã hội",
       "B"
     ],
-    "explanation": "Tăng trưởng kinh tế là phương tiện, mục đích cuối cùng là nâng cao đời sống và thực hiện tiến bộ, công bằng xã hội."
+    "explanation": "Tăng trưởng kinh tế phải gắn liền với nâng cao đời sống nhân dân, không hy sinh tiến bộ và công bằng xã hội để chạy theo tăng trưởng đơn thuần."
   },
   {
     "id": "q19",
     "theme": "Phần 4: Năm đặc trưng cơ bản",
-    "title": "Thành phần kinh tế giữ vai trò chủ đạo",
+    "title": "Vai trò của kinh tế nhà nước",
     "scenario": "Trong nền kinh tế thị trường định hướng XHCN ở Việt Nam, thành phần kinh tế nào giữ vai trò chủ đạo?",
     "options": [
       "Kinh tế tư nhân",
       "Kinh tế có vốn đầu tư nước ngoài",
       "Kinh tế nhà nước",
-      "Kinh tế cá thể, tiểu chủ"
+      "Kinh tế tập thể"
     ],
     "correctIndex": 2,
     "keywords": [
       "kinh tế nhà nước",
-      "chủ đạo",
+      "vai trò chủ đạo",
       "C"
     ],
-    "explanation": "Kinh tế nhà nước giữ vai trò chủ đạo, là công cụ vật chất quan trọng để Nhà nước định hướng và điều tiết nền kinh tế."
+    "explanation": "Kinh tế nhà nước giữ vai trò chủ đạo, nắm giữ các ngành then chốt để định hướng và điều tiết vĩ mô nền kinh tế."
   },
   {
     "id": "q20",
     "theme": "Phần 4: Năm đặc trưng cơ bản",
     "title": "Vị trí của kinh tế tư nhân",
-    "scenario": "Kinh tế tư nhân được Đảng và Nhà nước ta xác định có vị trí như thế nào trong nền kinh tế?",
+    "scenario": "Kinh tế tư nhân được xác định có vị trí như thế nào trong nền kinh tế thị trường định hướng XHCN?",
     "options": [
-      "Giữ vai trò chủ đạo độc tôn",
+      "Giữ vai trò chủ đạo tuyệt đối",
       "Là một động lực quan trọng của nền kinh tế",
-      "Là khu vực kinh tế tạm thời cần sớm triệt tiêu",
-      "Không được tham gia vào các ngành sản xuất cạnh tranh"
+      "Chỉ là thành phần kinh tế phụ trợ tạm thời",
+      "Không được phép cạnh tranh với kinh tế nhà nước"
     ],
     "correctIndex": 1,
     "keywords": [
-      "kinh tế tư nhân",
       "động lực quan trọng",
       "B"
     ],
-    "explanation": "Kinh tế tư nhân là một động lực quan trọng để huy động vốn, giải quyết việc làm và thúc đẩy tăng trưởng kinh tế."
+    "explanation": "Nghị quyết của Đảng khẳng định kinh tế tư nhân là một động lực quan trọng của nền kinh tế thị trường định hướng XHCN."
   },
   {
     "id": "q21",
     "theme": "Phần 4: Năm đặc trưng cơ bản",
-    "title": "Quan hệ giữa các thành phần kinh tế",
-    "scenario": "Mối quan hệ giữa các thành phần kinh tế trong nền KTTT định hướng XHCN ở nước ta là gì?",
+    "title": "Mối quan hệ giữa các thành phần kinh tế",
+    "scenario": "Mối quan hệ giữa các thành phần kinh tế trong nền kinh tế thị trường định hướng XHCN ở Việt Nam là:",
     "options": [
-      "Khép kín, đối kháng và tìm cách tiêu diệt lẫn nhau",
-      "Bình đẳng, hợp tác và cạnh tranh cùng phát triển theo pháp luật",
-      "Kinh tế nhà nước được độc quyền chèn ép các thành phần khác",
-      "Kinh tế tư nhân nắm quyền kiểm soát toàn bộ các chính sách nhà nước"
+      "Khép kín, đối kháng và triệt tiêu lẫn nhau",
+      "Bình đẳng, hợp tác và cạnh tranh theo pháp luật",
+      "Kinh tế nhà nước chèn ép và độc quyền trên mọi lĩnh vực",
+      "Kinh tế tư nhân kiểm soát toàn bộ chính sách nhà nước"
     ],
     "correctIndex": 1,
     "keywords": [
@@ -407,39 +396,40 @@
       "cạnh tranh theo pháp luật",
       "B"
     ],
-    "explanation": "Các thành phần kinh tế đều là bộ phận cấu thành hữu cơ của nền kinh tế, bình đẳng trước pháp luật, cùng hợp tác và cạnh tranh lành mạnh."
+    "explanation": "Các thành phần kinh tế bình đẳng trước pháp luật, cùng hợp tác và cạnh tranh lành mạnh để cùng phát triển."
   },
   {
     "id": "q22",
     "theme": "Phần 4: Năm đặc trưng cơ bản",
     "title": "Công cụ quản lý của Nhà nước",
-    "scenario": "Nhà nước pháp quyền XHCN thực hiện quản lý nền kinh tế thông qua những công cụ chủ yếu nào?",
+    "scenario": "Về quan hệ quản lý, Nhà nước pháp quyền XHCN quản lý nền kinh tế thông qua các công cụ chủ yếu nào?",
     "options": [
       "Mệnh lệnh hành chính mang tính áp đặt chủ quan và trực tiếp",
-      "Chỉ sử dụng tiền tài trợ từ các tổ chức quốc tế",
+      "Chỉ dùng các công cụ viện trợ phi chính phủ",
       "Pháp luật, chiến lược, quy hoạch, kế hoạch và các công cụ chính sách",
-      "Bằng cách can thiệp ấn định giá chi tiết từng mặt hàng trên thị trường"
+      "Bằng cách định giá trực tiếp cho tất cả các loại hàng hóa trên thị trường"
     ],
     "correctIndex": 2,
     "keywords": [
       "pháp luật",
       "chiến lược",
       "quy hoạch",
+      "kế hoạch",
       "chính sách",
       "C"
     ],
-    "explanation": "Nhà nước định hướng nền kinh tế thông qua hệ thống pháp luật, chiến lược phát triển, quy hoạch và các chính sách kinh tế vĩ mô."
+    "explanation": "Nhà nước quản lý nền kinh tế bằng pháp luật, chiến lược, quy hoạch, kế hoạch và các công cụ chính sách kinh tế vĩ mô."
   },
   {
     "id": "q23",
     "theme": "Phần 4: Năm đặc trưng cơ bản",
     "title": "Vai trò của thị trường trong quan hệ quản lý",
-    "scenario": "Trong mô hình KTTT định hướng XHCN, yếu tố thị trường đảm nhận vai trò chủ yếu nào?",
+    "scenario": "Trong nền kinh tế thị trường định hướng XHCN, thị trường đóng vai trò gì trong quản lý nền kinh tế?",
     "options": [
-      "Xây dựng và ban hành luật pháp cho đất nước",
+      "Không có vai trò gì ngoài việc mua bán nhỏ lẻ",
       "Hình thành giá cả, điều tiết sản xuất và phân bổ nguồn lực",
-      "Thay thế toàn bộ chức năng kiểm tra, giám sát của Nhà nước",
-      "Trực tiếp quản lý các quỹ phúc lợi an sinh xã hội"
+      "Thay thế hoàn toàn hệ thống pháp luật của Nhà nước",
+      "Tự động thiết lập các kế hoạch phát triển kinh tế vĩ mô"
     ],
     "correctIndex": 1,
     "keywords": [
@@ -448,18 +438,18 @@
       "phân bổ nguồn lực",
       "B"
     ],
-    "explanation": "Thị trường đóng vai trò quyết định trong việc hình thành giá cả hàng hóa, điều tiết lưu thông và phân bổ tối ưu các nguồn lực sản xuất."
+    "explanation": "Thị trường đóng vai trò trực tiếp xác định giá cả, điều tiết sản xuất - lưu thông và phân bổ các nguồn lực hiệu quả."
   },
   {
     "id": "q24",
     "theme": "Phần 4: Năm đặc trưng cơ bản",
     "title": "Hình thức phân phối chủ yếu",
-    "scenario": "Trong nền KTTT định hướng XHCN ở Việt Nam, hình thức phân phối nào giữ vai trò chủ yếu?",
+    "scenario": "Trong nền kinh tế thị trường định hướng XHCN ở Việt Nam, hình thức phân phối nào giữ vai trò chủ yếu?",
     "options": [
-      "Phân phối bình quân cào bằng tuyệt đối",
+      "Phân phối bình quân cào bằng cho mọi thành viên",
       "Phân phối theo kết quả lao động và hiệu quả kinh tế",
-      "Phân phối hoàn toàn dựa trên mức độ quan hệ quen biết",
-      "Phân phối chỉ thông qua trợ cấp từ thiện của Nhà nước"
+      "Phân phối hoàn toàn theo mức độ đóng góp vốn",
+      "Phân phối chỉ dựa vào trợ cấp xã hội của Nhà nước"
     ],
     "correctIndex": 1,
     "keywords": [
@@ -467,18 +457,18 @@
       "hiệu quả kinh tế",
       "B"
     ],
-    "explanation": "Phân phối theo kết quả lao động và hiệu quả kinh tế là hình thức chủ yếu, khuyến khích người lao động cống hiến và tăng năng suất."
+    "explanation": "Phân phối theo kết quả lao động và hiệu quả kinh tế là hình thức phân phối chủ yếu và giữ vai trò cốt lõi."
   },
   {
     "id": "q25",
     "theme": "Phần 4: Năm đặc trưng cơ bản",
     "title": "Các hình thức phân phối kết hợp",
-    "scenario": "Bên cạnh phân phối theo lao động, nền kinh tế nước ta còn kết hợp những hình thức phân phối nào?",
+    "scenario": "Ngoài phân phối theo lao động và hiệu quả kinh tế, nền kinh tế Việt Nam còn thực hiện những hình thức phân phối nào?",
     "options": [
       "Phân phối theo mức đóng góp vốn, các nguồn lực khác và qua an sinh, phúc lợi xã hội",
-      "Phân phối theo cấp bậc danh vọng truyền thống trong gia tộc",
-      "Phân phối độc quyền cho các tầng lớp quan chức hành chính",
-      "Chỉ phân phối cho những người không tham gia lao động"
+      "Phân phối theo cấp bậc chức vụ hành chính",
+      "Phân phối theo nguồn gốc xuất thân gia đình",
+      "Phân phối độc quyền cho các chủ sở hữu đất đai"
     ],
     "correctIndex": 0,
     "keywords": [
@@ -487,37 +477,37 @@
       "an sinh phúc lợi",
       "A"
     ],
-    "explanation": "Việt Nam thực hiện phân phối đa dạng: theo lao động, theo vốn/nguồn lực đóng góp và thông qua hệ thống an sinh, phúc lợi xã hội."
+    "explanation": "Bên cạnh phân phối theo lao động, còn có phân phối theo mức đóng góp vốn, các nguồn lực khác và qua hệ thống an sinh xã hội."
   },
   {
     "id": "q26",
     "theme": "Phần 4: Năm đặc trưng cơ bản",
     "title": "Thời điểm thực hiện tiến bộ và công bằng xã hội",
-    "scenario": "Theo quan điểm của Đảng ta, tiến bộ và công bằng xã hội cần được gắn với tăng trưởng kinh tế vào thời điểm nào?",
+    "scenario": "Việc kết hợp giữa tăng trưởng kinh tế với tiến bộ và công bằng xã hội cần được thực hiện vào thời điểm nào?",
     "options": [
-      "Chờ đến khi nền kinh tế hoàn thành quá trình hiện đại hóa",
-      "Chỉ thực hiện trong các giai đoạn kinh tế suy thoái nặng nề",
-      "Ngay trong từng bước đi và từng chính sách phát triển",
-      "Sau khi nguồn tài nguyên thiên nhiên đã được khai thác cạn kiệt"
+      "Chỉ sau khi nền kinh tế đã hoàn thành công nghiệp hóa",
+      "Khi nền kinh tế xảy ra khủng hoảng suy thoái",
+      "Ngay trong từng bước, từng chính sách phát triển",
+      "Chỉ thực hiện khi có nguồn tài trợ từ các tổ chức quốc tế"
     ],
     "correctIndex": 2,
     "keywords": [
-      "từng bước đi",
+      "ngay trong từng bước",
       "từng chính sách phát triển",
       "C"
     ],
-    "explanation": "Tiến bộ và công bằng xã hội không phải là mục tiêu để dành cho tương lai mà phải được thực hiện ngay trong từng bước và từng chính sách."
+    "explanation": "Tiến bộ và công bằng xã hội không phải đợi kinh tế phát triển cao mới làm, mà phải được thực hiện ngay trong từng bước và từng chính sách."
   },
   {
     "id": "q27",
-    "theme": "Phần 5: Thành tựu & Thách thức",
+    "theme": "Phần 5: Thành tựu & Hạn chế",
     "title": "Thành tựu cốt lõi của mô hình",
-    "scenario": "Đâu là thành tựu nổi bật nhất mà mô hình KTTT định hướng XHCN mang lại cho Việt Nam từ sau Đổi mới?",
+    "scenario": "Đâu là một trong những thành tựu nổi bật của việc phát triển kinh tế thị trường định hướng XHCN ở Việt Nam từ sau Đổi mới?",
     "options": [
-      "Xóa bỏ hoàn toàn sự cách biệt mức sống giữa nông thôn và thành thị",
+      "Triệt tiêu hoàn toàn sự chênh lệch giàu nghèo trong xã hội",
       "Thúc đẩy tăng trưởng kinh tế, mở rộng hội nhập quốc tế và cải thiện đời sống nhân dân",
-      "Đưa nền kinh tế trở thành trung tâm tài chính lớn nhất thế giới",
-      "Triệt tiêu hoàn toàn sự cạnh tranh trên thị trường tiêu dùng"
+      "Đưa năng suất lao động vượt qua tất cả các nước phát triển",
+      "Xóa bỏ hoàn toàn các tác động tiêu cực của quá trình đô thị hóa đối với môi trường"
     ],
     "correctIndex": 1,
     "keywords": [
@@ -526,57 +516,57 @@
       "cải thiện đời sống",
       "B"
     ],
-    "explanation": "Thành tựu to lớn là giải phóng sức sản xuất, thúc đẩy tăng trưởng, mở rộng hội nhập sâu rộng và cải thiện vượt bậc đời sống nhân dân."
+    "explanation": "Thành tựu nổi bật: kinh tế tăng trưởng khá cao và liên tục, hội nhập sâu rộng, đời sống vật chất và tinh thần của nhân dân được nâng lên rõ rệt."
   },
   {
     "id": "q28",
-    "theme": "Phần 5: Thành tựu & Thách thức",
+    "theme": "Phần 5: Thành tựu & Hạn chế",
     "title": "Đánh giá chỉ tiêu tăng trưởng GDP",
-    "scenario": "Về mặt lý luận, khi đánh giá chỉ số tăng trưởng GDP, cần có nhận thức đúng đắn như thế nào?",
+    "scenario": "Theo lưu ý về mặt lý thuyết trong bài thuyết trình, khi đánh giá chỉ tiêu tăng trưởng GDP, cần nhận thức như thế nào?",
     "options": [
-      "GDP tăng đồng nghĩa với việc xã hội đã đạt được công bằng toàn diện",
-      "GDP là thước đo duy nhất, tuyệt đối và đầy đủ về mức độ phát triển con người",
-      "GDP chịu tác động bởi nhiều yếu tố, không thể xem là bằng chứng duy nhất về hiệu quả mô hình",
-      "Tăng trưởng GDP hoàn toàn không có ý nghĩa gì đối với nền kinh tế"
+      "GDP tăng đồng nghĩa với việc toàn bộ xã hội đã đạt được công bằng toàn diện",
+      "GDP là thước đo duy nhất và tuyệt đối để khẳng định sự ưu việt của mô hình kinh tế",
+      "GDP chịu tác động bởi nhiều yếu tố, không thể xem là bằng chứng duy nhất về hiệu quả mô hình kinh tế",
+      "GDP hoàn toàn không có ý nghĩa gì đối với việc đánh giá nền kinh tế"
     ],
     "correctIndex": 2,
     "keywords": [
       "chịu tác động bởi nhiều yếu tố",
-      "không thể xem là duy nhất",
+      "không thể xem là bằng chứng duy nhất",
       "C"
     ],
-    "explanation": "Tăng trưởng GDP là chỉ tiêu quan trọng nhưng chịu tác động đa chiều, không thể coi là thước đo độc nhất về tính ưu việt của toàn bộ mô hình."
+    "explanation": "Tăng trưởng GDP chịu ảnh hưởng của nhiều yếu tố vĩ mô và quốc tế; cần kết hợp nhiều chỉ số an sinh, môi trường và phát triển con người."
   },
   {
     "id": "q29",
-    "theme": "Phần 5: Thành tựu & Thách thức",
-    "title": "Những hạn chế và thách thức thực tế",
-    "scenario": "Đâu là những hạn chế, thách thức lớn còn tồn tại trong quá trình phát triển KTTT ở nước ta?",
+    "theme": "Phần 5: Thành tựu & Hạn chế",
+    "title": "Những hạn chế và thách thức",
+    "scenario": "Đâu là những hạn chế, thách thức lớn đặt ra trong quá trình phát triển kinh tế thị trường định hướng XHCN ở nước ta?",
     "options": [
-      "Khu vực kinh tế tư nhân suy thoái và thị trường thiếu vắng sự cạnh tranh",
-      "Chênh lệch thu nhập giữa các nhóm dân cư, chất lượng lao động và áp lực môi trường",
-      "Sự can thiệp thái quá của người lao động vào quyền lợi doanh nghiệp",
-      "Sự biến mất hoàn toàn của các chính sách an sinh xã hội"
+      "Sự suy giảm của kinh tế tư nhân và thiếu vắng cạnh tranh",
+      "Chênh lệch thu nhập giữa các nhóm dân cư, chất lượng nguồn nhân lực và áp lực môi trường",
+      "Sự can thiệp quá mức của thị trường vào các chính sách an sinh xã hội",
+      "Việc người lao động không được hưởng tiền lương theo kết quả làm việc"
     ],
     "correctIndex": 1,
     "keywords": [
       "chênh lệch thu nhập",
-      "chất lượng lao động",
+      "chất lượng nguồn nhân lực",
       "áp lực môi trường",
       "B"
     ],
-    "explanation": "Các thách thức lớn gồm có phân hóa khoảng cách giàu nghèo, chất lượng nhân lực chưa theo kịp hội nhập và áp lực ô nhiễm môi trường."
+    "explanation": "Thách thức: phân hóa giàu nghèo còn lớn, chất lượng nguồn nhân lực và năng suất chưa cao, ô nhiễm môi trường và biến đổi khí hậu gia tăng."
   },
   {
     "id": "q30",
-    "theme": "Phần 5: Thành tựu & Thách thức",
-    "title": "Bản chất đúc kết của mô hình",
-    "scenario": "Kết luận cô đọng nhất về bản chất của nền kinh tế thị trường định hướng XHCN ở Việt Nam là gì?",
+    "theme": "Phần 5: Thành tựu & Hạn chế",
+    "title": "Kết luận bản chất mô hình KTTT định hướng XHCN",
+    "scenario": "Kết luận chung về bản chất của mô hình kinh tế thị trường định hướng XHCN ở Việt Nam là:",
     "options": [
-      "Vừa vận hành theo các quy luật thị trường, vừa hướng đến mục tiêu phát triển vì con người và xã hội",
-      "Chỉ vận hành theo các chỉ tiêu kế hoạch hóa cứng nhắc từ Trung ương",
-      "Thả nổi thị trường theo quy luật cạnh tranh cá lớn nuốt cá bé của chủ nghĩa tư bản",
-      "Một mô hình đóng cửa khép kín nhằm tự bảo vệ trước kinh tế toàn cầu"
+      "Vừa vận hành theo những quy luật thị trường, vừa hướng đến mục tiêu phát triển vì con người và xã hội",
+      "Vận hành hoàn toàn theo mô hình kinh tế chỉ huy truyền thống",
+      "Tách rời hoàn toàn vai trò của Nhà nước để thả nổi theo kinh tế thị trường tư bản",
+      "Chỉ chú trọng phát triển kinh tế thuần túy mà không cần xây dựng cơ sở vật chất của CNXH"
     ],
     "correctIndex": 0,
     "keywords": [
@@ -584,6 +574,6 @@
       "vì con người và xã hội",
       "A"
     ],
-    "explanation": "Bản chất mô hình là vận dụng sáng tạo ưu thế của kinh tế thị trường để phát triển lực lượng sản xuất, nhưng kiên định mục tiêu phục vụ con người và xã hội."
+    "explanation": "KTTT định hướng XHCN là mô hình kinh tế vừa tuân theo các quy luật thị trường khách quan, vừa hướng tới mục tiêu phát triển vì con người và tiến bộ xã hội."
   }
 ]
