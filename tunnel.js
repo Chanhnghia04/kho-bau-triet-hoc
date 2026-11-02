@@ -31,6 +31,10 @@ function getCloudflaredPath() {
 }
 
 function startTunnel(port = 3000, onStatusChange = null) {
+  if (process.env.RENDER === 'true' || process.env.PORT === '10000') {
+    console.log('[TUNNEL] Đang chạy trên Render Cloud, bỏ qua Cloudflare Tunnel.');
+    return Promise.resolve({ active: false, url: null, status: 'offline', error: null });
+  }
   if (onStatusChange) {
     statusChangeCallback = onStatusChange;
   }

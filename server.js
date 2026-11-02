@@ -59,23 +59,32 @@ async function generateQRCode(url) {
   }
 }
 
-const RENDER_EXTERNAL_URL = process.env.RENDER_EXTERNAL_URL;
+// Cloud Render Detection & Public URL Resolver
+const isRenderCloud = process.env.RENDER === 'true' 
+  || Boolean(process.env.RENDER_EXTERNAL_URL) 
+  || Boolean(process.env.RENDER_EXTERNAL_HOSTNAME) 
+  || (process.env.PORT && process.env.PORT === '10000');
+
+let RENDER_EXTERNAL_URL = process.env.RENDER_EXTERNAL_URL
+  || (process.env.RENDER_EXTERNAL_HOSTNAME ? `https://${process.env.RENDER_EXTERNAL_HOSTNAME}` : null)
+  || (isRenderCloud ? 'https://kho-bau-triet-hoc.onrender.com' : null);
 
 function getNetworkPayload() {
-  if (RENDER_EXTERNAL_URL) {
+  if (isRenderCloud || RENDER_EXTERNAL_URL) {
+    const publicUrl = RENDER_EXTERNAL_URL || 'https://kho-bau-triet-hoc.onrender.com';
     return {
       localIp: LOCAL_IP,
       port: PORT,
-      lanUrl: RENDER_EXTERNAL_URL,
-      onlineUrl: RENDER_EXTERNAL_URL,
+      lanUrl: publicUrl,
+      onlineUrl: publicUrl,
       isOnlineMode: true,
-      mobileUrl: RENDER_EXTERNAL_URL,
-      activeUrl: RENDER_EXTERNAL_URL,
-      adminUrl: `${RENDER_EXTERNAL_URL}/admin`,
+      mobileUrl: publicUrl,
+      activeUrl: publicUrl,
+      adminUrl: `${publicUrl}/admin`,
       qrCodeDataUrl: qrCodeDataUrl,
       tunnelState: {
         active: true,
-        url: RENDER_EXTERNAL_URL,
+        url: publicUrl,
         status: 'online',
         error: null
       }
@@ -112,9 +121,10 @@ function onTunnelStatusUpdate(tState) {
 }
 
 // Generate QR code and initialize tunnel (bypasses tunnel if running on Render)
-if (RENDER_EXTERNAL_URL) {
-  generateQRCode(RENDER_EXTERNAL_URL).then(() => {
-    console.log('[RENDER] Server đang chạy trực tiếp trên Render Cloud:', RENDER_EXTERNAL_URL);
+if (isRenderCloud || RENDER_EXTERNAL_URL) {
+  const finalRenderUrl = RENDER_EXTERNAL_URL || 'https://kho-bau-triet-hoc.onrender.com';
+  generateQRCode(finalRenderUrl).then(() => {
+    console.log('[RENDER] Server dang chay truc tiep tren Render Cloud:', finalRenderUrl);
   });
 } else {
   generateQRCode(`http://${LOCAL_IP}:${PORT}`).then(() => {
